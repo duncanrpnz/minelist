@@ -1,0 +1,29 @@
+.Button {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px 16px 10px 12px;
+    font-weight: bold;
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    
+}
+
+.Button .Icon {
+  
+}
+
+.Button span {
+    padding-left: 8px;
+}
+
+.Button:disabled {
+    color: #ccc;
+    border: 1px solid #ddd;
+    background: #eee;
+    cursor: not-allowed;
+}

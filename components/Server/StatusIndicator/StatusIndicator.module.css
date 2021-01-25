@@ -1,0 +1,14 @@
+
+.StatusIndicator {
+    padding: 5px 30px;
+    color: #FFF;
+    box-sizing:border-box;
+    border-radius: 4px;
+}
+
+.Online {
+    background: green;
+}
+.Offline {
+    background: red;
+}

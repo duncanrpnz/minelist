@@ -1,0 +1,23 @@
+.NavigationBar {
+    width: 100%;
+    height: 56px;
+    background-color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10 15px;
+    box-sizing: border-box;
+    z-index: 90;
+    
+    flex-flow: column;
+}
+
+.NavigationBar h3 {
+    color: #FFF;
+    
+}
+
+.NavigationBar nav {
+    height: 100%;
+    display: flex;
+}

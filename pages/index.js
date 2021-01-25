@@ -1,65 +1,75 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React from "react";
+import { useRouter } from 'next/router';
+import { wrapper } from "../redux";
+import { checkServerSideCookie } from "../redux/actions/auth";
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+import Head from "next/head";
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+import Server from "../containers/ServerList/Server/Server";
+import PagedTable from "../components/PagedTable/PagedTable";
+import Layout from "../hoc/Layout/Layout";
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+export default function Home(props) {
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+	const router = useRouter();
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+	const serverClickedHandler = (id) => {
+		router.push(`/server/${id}`);
+	};
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+	return (
+		<Layout authenticated={props.token ? true : false}>
+			<PagedTable
+				sponsored
+				url="http://localhost:3001/servers/sponsored"
+				page={1}
+				pageSize={5}
+				maxButtonsCount={6}
+				columns={["Rank", "Name", "Server", "Players", "Status"]}
+				itemRenderer={(dataItem) => {
+					return (
+						<Server
+							{...dataItem}
+							key={dataItem.id}
+							clicked={serverClickedHandler}
+						/>
+					);
+				}}
+			/>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+			<PagedTable
+				url="http://localhost:3001/servers"
+				page={1}
+				pageSize={15}
+				maxButtonsCount={6}
+				columns={["Rank", "Name", "Server", "Players", "Status"]}
+				itemRenderer={(dataItem) => {
+					return (
+						<Server
+							{...dataItem}
+							key={dataItem.id}
+							clicked={serverClickedHandler}
+						/>
+					);
+				}}
+			/>
+		</Layout>
+	);
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+	async (context) => {
+	  await checkServerSideCookie(context);
+	  const token = context.store.getState().token;
+	  
+	  return {
+		props: {
+		  token,
+		},
+	  };
+	}
+  );
+  
+
+  

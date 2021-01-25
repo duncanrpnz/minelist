@@ -1,0 +1,36 @@
+.Server {
+    height: 80px;
+    line-height: 80px;
+    box-sizing: border-box;
+
+    cursor: pointer;
+}
+
+.Server:hover {
+    background-color: #eee;
+}
+
+.Server td {
+    padding: 10px;
+    height: 100%;
+}
+
+.Server > td > img {
+    line-height: 80px;
+}
+
+.Server .name {
+    cursor: pointer;
+}
+
+.Server .banner {
+    background: lightgray;
+    width: 468px;
+    height: 60px;
+
+    cursor: pointer;
+}
+
+.Server .banner:hover {
+    cursor: pointer;
+}

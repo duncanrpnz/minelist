@@ -1,0 +1,13 @@
+.Login {
+    width: 50%;
+    border: 1px solid #000;
+    margin: 0px auto;
+
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.Login .Button {
+    display: block;
+    margin: 0px auto;
+}
