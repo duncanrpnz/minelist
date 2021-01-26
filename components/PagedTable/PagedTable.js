@@ -27,7 +27,7 @@ class PagedTable extends Component {
 			page = this.state.currentPage;
 		}
 
-		let url = `${this.props.url}?page=${page}&pageSize=${this.props.pageSize}`;
+		let url = `${process.env.api}?page=${page}&pageSize=${this.props.pageSize}`;
 
 		this.setState({ loading: true });
 
