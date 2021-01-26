@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { wrapper } from "../../redux";
 import { checkServerSideCookie } from "../../redux/actions/auth";
 import { useRouter } from "next/router";
-import axios from "axios";
+import axios from "../../axios";
 import Layout from "../../hoc/Layout/Layout";
 import ServerView from "../../containers/Server/ServerView/ServerView";
 import LoadingIndicator from "../../components/UI/LoadingIndicator/LoadingIndicator";
@@ -14,7 +14,7 @@ export default function serverIndex(props) {
 	const [server, setServer] = useState(null);
 
 	useEffect(() => {
-		let url = "http://localhost:3001/servers/" + serverId;
+		let url = "/servers/" + serverId;
 
 		axios({
 			url: url,

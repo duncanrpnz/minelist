@@ -7,7 +7,7 @@ export const description = (props) => {
 			<div className="row p-4">
 				<img
 					className="mx-auto mb-4"
-					src={`http://localhost:3001/servers/${props.id}/banner`}
+					src={`${process.env.api}servers/${props.id}/banner`}
 				/>
 			</div>
 			<p className="p-3 text-justify">{props.description}</p>

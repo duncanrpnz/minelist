@@ -30,7 +30,7 @@ class Server extends Component {
 				<td>
 					<img
 						className={classes.banner}
-						src={`http://localhost:3001/servers/${this.props.id}/banner`}
+						src={`${process.env.api}servers/${this.props.id}/banner`}
 						onClick={() => this.props.clicked(this.props.id)}
 					/>
 				</td>

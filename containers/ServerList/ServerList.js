@@ -5,7 +5,7 @@ import Server from "./Server/Server";
 
 import classes from "./ServerList.module.css";
 
-import axios from "axios";
+import axios from "../../axios";
 import { withRouter } from "next/router";
 
 const _PAGESIZE = 5;
@@ -19,7 +19,7 @@ class ServerList extends Component {
 	};
 
 	componentDidMount() {
-		let serverUrl = `http://localhost:3001/servers?page=${this.state.currentPage}&pageSize=${_PAGESIZE}`;
+		let serverUrl = `/servers?page=${this.state.currentPage}&pageSize=${_PAGESIZE}`;
 
 		if (this.props.sponsored) {
 			serverUrl = serverUrl + "/sponsored";

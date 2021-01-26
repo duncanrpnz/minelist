@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axios";
 import React, { Component } from "react";
 import { wrapper } from "../../redux";
 import { Input, Form, FormControl, Button, Table } from "react-bootstrap";
