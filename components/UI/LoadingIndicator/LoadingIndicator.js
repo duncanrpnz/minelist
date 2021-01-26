@@ -1,8 +1,8 @@
 import React from 'react';
-import classes from './loadingIndicator.module.css';
+import classes from './LoadingIndicator.module.css';
 
-const loadingIndicator = (props) => (
+const LoadingIndicator = (props) => (
     <div className={classes.loader}><div></div><div></div><div></div><div></div></div>
 );
 
-export default loadingIndicator;
+export default LoadingIndicator;

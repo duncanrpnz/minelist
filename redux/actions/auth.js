@@ -9,7 +9,8 @@ import axios from "../../axios";
 import logout from "../../pages/logout";
 
 export const authenticate = (user) => (dispatch) =>
-	fetch(`http://localhost:3001/auth/login`, {
+
+	fetch(`${process.env.api}/auth/login`, {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
