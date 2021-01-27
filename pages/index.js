@@ -62,7 +62,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
 	  await checkServerSideCookie(context);
 	  const token = context.store.getState().token;
-	  const api = process.env.api;
+	  const api = process.env.NEXT_PUBLIC_api;
 
 	  return {
 		props: {

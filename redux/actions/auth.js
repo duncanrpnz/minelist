@@ -10,7 +10,7 @@ import logout from "../../pages/logout";
 
 export const authenticate = (user) => (dispatch) =>
 
-	fetch(`${process.env.api}/auth/login`, {
+	fetch(`${process.env.NEXT_PUBLIC_api}/auth/login`, {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
