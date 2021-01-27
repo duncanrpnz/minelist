@@ -38,11 +38,18 @@ class NavigationBar extends Component {
 			</React.Fragment>
 		);
 
-        console.log(this.props.authenticated);
-
 		if (this.props.authenticated) {
 			buttons = (
 				<React.Fragment>
+					<Button
+						onClick={() => router.push("/server/manage")}
+						className="mr-2"
+						type="submit"
+						variant="light"
+					>
+						Manage Servers
+					</Button>
+
 					<Button
 						onClick={() => router.push("/server/add")}
 						className="mr-2"

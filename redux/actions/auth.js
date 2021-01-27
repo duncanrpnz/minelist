@@ -9,8 +9,7 @@ import axios from "../../axios";
 import logout from "../../pages/logout";
 
 export const authenticate = (user) => (dispatch) =>
-
-	fetch(`${process.env.NEXT_PUBLIC_api}/auth/login`, {
+	fetch(`${process.env.NEXT_PUBLIC_api}auth/login`, {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
@@ -23,9 +22,9 @@ export const authenticate = (user) => (dispatch) =>
 			if (response.code === 200) {
 				setCookie("token", response.token);
 
-        setTimeout(() => {
-          dispatch(deauthenticate());
-        }, (60 * 1000))
+				setTimeout(() => {
+					dispatch(deauthenticate());
+				}, 60 * 1000);
 
 				Router.push("/");
 				dispatch({ type: AUTHENTICATE, payload: response.token });
@@ -39,9 +38,6 @@ export const authenticate = (user) => (dispatch) =>
 
 // gets the token from the cookie and saves it in the store
 export const reauthenticate = (token) => {
-  console.log("Reauthing..." + token);
-  
-
 	return (dispatch) => {
 		dispatch({ type: AUTHENTICATE, payload: token });
 	};
@@ -59,20 +55,15 @@ export const deauthenticate = () => {
 export const checkServerSideCookie = async (ctx) => {
 	const token = getCookie("token", ctx.req);
 
-
 	if (token) {
-  
-
 		const sessionResponse = await axios.post("/auth/verify", {
 			token: token,
-    });
-    
+		});
+
 		const { session_valid } = sessionResponse.data;
 
-		console.log("Valid session = ", session_valid);
-
 		if (session_valid == true) {
-      ctx.store.dispatch(reauthenticate(token));
+			ctx.store.dispatch(reauthenticate(token));
 		} else {
 			ctx.store.dispatch(deauthenticate());
 		}

@@ -62,6 +62,19 @@ const serverAdd = (props) => {
 				touched: true,
 				validation: (value) => value.length > 0 && !isNaN(value),
 			},
+			description: {
+				attributes: {
+					label: "Description",
+					id: "description",
+					name: "description",
+					value: "",
+					type: "textarea",
+					placeholder: "Describe your server",
+				},
+				valid: true,
+				touched: true,
+				validation: (value) => value.length > 100
+			},
 			website: {
 				attributes: {
 					label: "Website",

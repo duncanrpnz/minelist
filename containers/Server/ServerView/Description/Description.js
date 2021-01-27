@@ -3,17 +3,24 @@ import Button from "../../../../components/UI/Button/Button";
 
 export const description = (props) => {
 	return (
-		<React.Fragment>
-			<div className="row p-4">
-				<img
-					className="mx-auto mb-4"
-					src={`${process.env.NEXT_PUBLIC_api}servers/${props.id}/banner`}
-				/>
+		<div class="container">
+			<div className="row pt-4">
+				<div className="col-md-12 text-center">
+					<img
+						className="mb-4"
+						src={`${process.env.NEXT_PUBLIC_api}servers/${props.id}/banner`}
+					/>
+				</div>
 			</div>
-			<p className="p-3 text-justify">{props.description}</p>
 
-            <Button>Vote</Button>
-		</React.Fragment>
+			<div className="row">
+				<div className="col-md-12">
+					<p className="text-break text-justify">{props.description}</p>
+				</div>
+			</div>
+
+			<Button>Vote</Button>
+		</div>
 	);
 };
 

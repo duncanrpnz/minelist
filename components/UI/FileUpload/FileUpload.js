@@ -16,7 +16,6 @@ const fileUpload = (props) => {
 
 	useEffect(() => {
 		if (fileData) {
-			console.log(fileData);
 
 			if (
 				!["image/jpeg", "image/png", "image/gif"].includes(

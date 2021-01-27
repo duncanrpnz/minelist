@@ -33,23 +33,23 @@ export default function serverIndex(props) {
 	let display = <LoadingIndicator />;
 
 	if (server) {
-		display = <ServerView {...server}/>
+		display = <ServerView {...server} />;
 	}
 
 	return (
 		<Layout authenticated={props.token ? true : false}>{display}</Layout>
 	);
 }
-
 export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
-		checkServerSideCookie(context);
-		const token = context.store.getState().token;
+	  await checkServerSideCookie(context);
+	  const token = context.store.getState().token;
 
-		return {
-			props: {
-				token,
-			},
-		};
+	  return {
+		props: {
+		  token,
+		},
+	  };
 	}
-);
+  );
+  

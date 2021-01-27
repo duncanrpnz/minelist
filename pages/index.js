@@ -21,7 +21,7 @@ export default function Home(props) {
 	return (
 		<Layout authenticated={props.token ? true : false}>
 			<PagedTable
-				sponsored
+				title="Sponsored Servers"
 				url="/servers/sponsored"
 				page={1}
 				pageSize={5}
@@ -39,6 +39,7 @@ export default function Home(props) {
 			/>
 
 			<PagedTable
+				title="Server List"
 				url="/servers"
 				page={1}
 				pageSize={15}
@@ -62,7 +63,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
 	  await checkServerSideCookie(context);
 	  const token = context.store.getState().token;
-	  const api = process.env.NEXT_PUBLIC_api;
 
 	  return {
 		props: {

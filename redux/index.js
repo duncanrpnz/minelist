@@ -3,6 +3,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 import reducer from "./reducers";
 import { createWrapper } from "next-redux-wrapper";
+import Axios from "../axios";
 
 const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== "production") {
@@ -12,8 +13,30 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware);
 };
 
+const interceptor = (store) => {
+  Axios.interceptors.request.use(
+      (conf) => {
+          const state = store.getState();
+ 
+          if(!conf.headers['Authorization']){
+              conf.headers["Authorization"] = `Bearer ${state.token}`
+          }
+
+          return conf;
+      },
+      (error) => {
+          return Promise.reject(error);
+      }
+  );
+};
+
+let store = null;
 const initStore = () => {
-  return createStore(reducer, bindMiddleware([thunkMiddleware]));
+  store = createStore(reducer, bindMiddleware([thunkMiddleware]));
+  interceptor(store);
+  return store;
 };
 
 export const wrapper = createWrapper(initStore);
+
+export default store;

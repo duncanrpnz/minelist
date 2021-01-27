@@ -54,6 +54,10 @@ const input = (props) => {
 		input = <FileUpload changed={props.changed} value={props.attributes.value} key="fileUpload" />;
 	}
 
+	if(props.attributes.type === "textarea") {
+		input = <textarea {...props.attributes}  onChange={props.changed} className={inputClasses.join(' ')} rows="5"></textarea>
+	}
+
 	return (
 		<React.Fragment>
 			{props.attributes.label && (

@@ -22,7 +22,7 @@ class PagedTable extends Component {
 	}
 
 	loadPage = (page) => {
-		console.log("Props: ", this.props);
+
 		if (!page) {
 			page = this.state.currentPage;
 		}
@@ -36,7 +36,6 @@ class PagedTable extends Component {
 			method: "GET",
 		})
 			.then((result) => {
-				console.log("Results: ", result);
 
 				this.setState({
 					loading: false,
@@ -48,14 +47,12 @@ class PagedTable extends Component {
 				});
 			})
 			.catch((error) => {
-				console.log("Load error: " + error);
 
 				this.setState({ loading: false, error: error });
 			});
 	};
 
 	setPageHandler = (page) => {
-		console.log("Loading page = " + page);
 
 		this.loadPage(page);
 	};
@@ -81,7 +78,7 @@ class PagedTable extends Component {
 					<tr>
 						<td colSpan="100%">
 							<div className="pt-5 text-center">
-								<h5>No servers to display</h5>
+								<h5>{this.props.noDataMsg ?? "No data to display"}</h5>
 							</div>
 						</td>
 					</tr>
@@ -209,9 +206,7 @@ class PagedTable extends Component {
 		return (
 			<div key={this.props.key}>
 				<h3 className="mb-4">
-					{this.props.sponsored
-						? "Sponsored Servers"
-						: "Minecraft Servers"}
+					{this.props.title}
 				</h3>
 
 				<Table

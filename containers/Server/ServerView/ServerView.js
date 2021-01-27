@@ -14,7 +14,6 @@ const serverView = (props) => {
     
     const [selectedTab, setSelectedTab] = useState(<Description {...props}/>)
 
-    console.log(props);
     
 	return (
 		<React.Fragment>
