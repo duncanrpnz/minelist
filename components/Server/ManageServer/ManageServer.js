@@ -44,7 +44,7 @@ class Server extends Component {
 					{this.props.players_online}/{this.props.max_players ?? 20}
 				</td>
 				<td className="text-center">
-					<FontAwesomeIcon className={classes.ServerAction} icon={faEdit} size="1x" />
+					<FontAwesomeIcon className={classes.ServerAction} icon={faEdit} size="1x" onClick={this.props.editClicked} />
 
 					<FontAwesomeIcon className={classes.ServerAction} icon={faTrash} size="1x" onClick={this.props.deleteClicked}/>
 				</td>

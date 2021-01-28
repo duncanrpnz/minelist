@@ -3,8 +3,7 @@ import classes from "./Input.module.css";
 import FileUpload from "../FileUpload/FileUpload";
 
 const input = (props) => {
-	console.log(props);
-	
+
 	let inputClasses = [classes.Input];
 
 	if (!props.valid && props.touched) {

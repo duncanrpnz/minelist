@@ -6,6 +6,8 @@ import Button from "../Button/Button";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 
 const fileUpload = (props) => {
+
+
 	const inputFile = useRef(null);
 
 	const [fileData, setFileData] = useState(null);
@@ -13,6 +15,17 @@ const fileUpload = (props) => {
 	const [fileBlob, setFileBlob] = useState(null);
 
 	const [fileValid, setFileValid] = useState(false);
+
+	const [image64, setImage64] = useState(null);
+
+	
+	useEffect(() => {
+		if(props.value) {
+			setImage64(props.value);
+			props.changed(props.value);
+		}
+	}, [props.value]);
+	
 
 	useEffect(() => {
 		if (fileData) {
@@ -48,6 +61,7 @@ const fileUpload = (props) => {
 				reader.readAsBinaryString(fileData);
 
 				reader.onload = function () {
+					setImage64(btoa(reader.result));
 					props.changed(btoa(reader.result));
 				};
 				reader.onerror = function () {
@@ -56,14 +70,10 @@ const fileUpload = (props) => {
 			};
 
 			img.src = objectURL;
+
 			setFileBlob(objectURL);
 		}
 	}, [fileData]);
-
-
-    useEffect(() => {
-        console.log("Value: ", props.value);
-    }, props.value);
 
 	const selectFilterHandlerDialog = (e) => {
 		e.preventDefault();
@@ -79,7 +89,7 @@ const fileUpload = (props) => {
 
 	return (
 		<React.Fragment>
-			<img className={classes.Image} src={fileBlob ? fileBlob : null} width="100%" />
+			<img className={classes.Image} src={`data:image/png;base64,${image64}`} width="100%" />
 			<br />
 
 			<div className={classes.FileUpload}>

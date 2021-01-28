@@ -21,6 +21,35 @@ const serverAdd = (props) => {
 
 	const [errors, setErrors] = useState(null);
 
+	useEffect(() => {
+		if (props.id) {
+			setLoading(true);
+
+			//Lookup existing stuffs
+			axios.get(`/servers/${props.id}`).then((result) => {
+				const data = result.data[0];
+
+				const controls = { ...state.controls };
+
+				controls.name.attributes.value = data.name ?? "";
+				controls.host.attributes.value = data.ip ?? "";
+				controls.port.attributes.value = data.port ?? "25565";
+				controls.description.attributes.value = data.description ?? "";
+				controls.website.attributes.value = data.social_website ?? "";
+				controls.discord.attributes.value = data.social_discord ?? "";
+				controls.country.attributes.value = data.country;
+				controls.file.attributes.value = data.banner;
+
+				setState({
+					...state,
+					controls: controls,
+				});
+
+				setLoading(false);
+			});
+		}
+	}, [props.id]);
+
 	const [state, setState] = useState({
 		controls: {
 			name: {
@@ -73,7 +102,7 @@ const serverAdd = (props) => {
 				},
 				valid: true,
 				touched: true,
-				validation: (value) => value.length > 100
+				validation: (value) => value.length > 100,
 			},
 			website: {
 				attributes: {
@@ -190,33 +219,49 @@ const serverAdd = (props) => {
 			data[key] = state.controls[key].attributes.value;
 		});
 
-		axios
-			.post("/servers", data, {
-				headers: {
-					Authorization: `Bearer ${props.token}`,
-				},
-			})
-			.then((response) => {
-				if (response.data.code === 201) {
-					props.router.replace("/");
-				}
+		if (!props.id) {
+			axios
+				.post("/servers", data)
+				.then((response) => {
+					if (response.data.code === 201) {
+						props.router.replace("/");
+					}
 
-				if (response.data.code === 400) {
+					if (response.data.code === 400) {
+						setLoading(false);
+						setErrors(response.data.errors);
+					}
+				})
+				.catch((error) => {
 					setLoading(false);
-					setErrors(response.data.errors);
-				}
-			})
-			.catch((error) => {
-				setLoading(false);
-				setErrors(["An error occured while adding server"]);
-			});
+					setErrors(["An error occured while adding server"]);
+				});
+		} else {
+			axios
+				.put(`/servers/${props.id}`, data)
+				.then((response) => {
+					console.log(response);
+					if (response.data.code === 201) {
+						props.router.replace("/server/manage");
+					}
+
+					if (response.data.code === 400) {
+						setLoading(false);
+						setErrors(response.data.errors);
+					}
+				})
+				.catch((error) => {
+					setLoading(false);
+					setErrors(["An error occured while adding server"]);
+				});
+		}
 	};
 
-    let formClasses = [];
+	let formClasses = [];
 
-    if(loading) {
-        formClasses = ["d-none"]
-    }
+	if (loading) {
+		formClasses = ["d-none"];
+	}
 
 	return (
 		<form
@@ -226,7 +271,7 @@ const serverAdd = (props) => {
 		>
 			{loading && <LoadingIndicator />}
 
-			<div className={formClasses.join(' ')}>
+			<div className={formClasses.join(" ")}>
 				<h2>Add Your Server</h2>
 				<p>
 					Please fill in all required details in order to post your

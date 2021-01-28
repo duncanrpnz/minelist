@@ -21,7 +21,11 @@ export default function manageIndex(props) {
 	const deleteClickedHandler = (id) => {
 		setDeleteContext(id);
 		setShowConfirm(true);
-	};
+    };
+    
+    const editClickedHandler = (id) => {
+        router.push(`/server/manage/${id}`);
+    };
 
 	const serverClickedHandler = (id) => {
 		router.push(`/server/${id}`);
@@ -71,9 +75,8 @@ export default function manageIndex(props) {
 						<ManageServer
 							{...dataItem}
 							key={dataItem.id}
-							deleteClicked={() =>
-								deleteClickedHandler(dataItem.id)
-							}
+							deleteClicked={() => deleteClickedHandler(dataItem.id)}
+                            editClicked={() => editClickedHandler(dataItem.id)}
 							// clicked={() => serverClickedHandler(dataItem.id)}
 						/>
 					);
