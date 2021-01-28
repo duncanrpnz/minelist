@@ -4,11 +4,15 @@ import {
 	AUTHENTICATE,
 	DEAUTHENTICATE,
 	AUTHENTICATE_FAIL,
+	LOGIN_START,
+	LOGIN_END
 } from "../actionTypes";
 import axios from "../../axios";
 import logout from "../../pages/logout";
 
-export const authenticate = (user) => (dispatch) =>
+export const authenticate = (user) => (dispatch) => {
+	dispatch(loggingIn());
+
 	fetch(`${process.env.NEXT_PUBLIC_api}auth/login`, {
 		method: "POST",
 		headers: {
@@ -24,17 +28,34 @@ export const authenticate = (user) => (dispatch) =>
 
 				setTimeout(() => {
 					dispatch(deauthenticate());
+					dispatch(loggingInFinish());
 				}, 60 * 1000);
 
 				Router.push("/");
 				dispatch({ type: AUTHENTICATE, payload: response.token });
+				dispatch(loggingInFinish());
 			} else {
 				dispatch({ type: AUTHENTICATE_FAIL, payload: response.error });
+				dispatch(loggingInFinish());
 			}
 		})
 		.catch((err) => {
 			console.log("Auth error: " + err);
+			dispatch(loggingInFinish());
 		});
+};
+
+export const loggingIn = () => {
+	return (dispatch) => {
+		dispatch({ type: LOGIN_START });
+	};
+};
+
+export const loggingInFinish = () => {
+	return (dispatch) => {
+		dispatch({ type: LOGIN_END });
+	};
+};
 
 // gets the token from the cookie and saves it in the store
 export const reauthenticate = (token) => {

@@ -1,7 +1,7 @@
-import { AUTHENTICATE, DEAUTHENTICATE, AUTHENTICATE_FAIL } from "../actionTypes";
+import { AUTHENTICATE, DEAUTHENTICATE, AUTHENTICATE_FAIL, LOGIN_START, LOGIN_END } from "../actionTypes";
 import { HYDRATE } from "next-redux-wrapper";
 
-const initialState = { token: null, error: null };
+const initialState = { token: null, error: null, loggingIn: false };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,6 +11,10 @@ const authReducer = (state = initialState, action) => {
       };
     case AUTHENTICATE:
       return { ...state, token: action.payload };
+    case LOGIN_START:
+      return {...state, loggingIn: true};
+    case LOGIN_END:
+      return {...state, loggingIn: false};
     case AUTHENTICATE_FAIL:
       return {...state, error: action.payload};
     case DEAUTHENTICATE:

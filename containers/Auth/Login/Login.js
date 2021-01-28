@@ -9,15 +9,16 @@ import { connect } from "react-redux";
 import {
 	authenticate,
 	checkServerSideCookie,
+	loggingInFinish,
 } from "../../../redux/actions/auth";
 import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button/Button";
 import { faUser, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { isEmail, isValidPassword } from "../../../shared/formValidation";
+import LoadingIndicator from "../../../components/UI/LoadingIndicator/LoadingIndicator";
 
-const Login = ({ authenticate, token, error}) => {
-
-	
+const Login = ({ authenticate, token, loggingIn, error }) => {
+	console.log("Logging in state = " + loggingIn);
 
 	const [formValid, setFormValid] = useState(false);
 
@@ -66,7 +67,6 @@ const Login = ({ authenticate, token, error}) => {
 	};
 
 	const formInputChangedHandler = (e) => {
-
 		const element = e.target.id;
 		const elementVal = e.target.value;
 
@@ -104,8 +104,8 @@ const Login = ({ authenticate, token, error}) => {
 		setFormValid(formValid);
 	};
 
-	return (
-		<form className={classes.Login} onSubmit={loginSubmitHandler}>
+	const formContents = (
+		<React.Fragment>
 			<h2>Login</h2>
 			<p>Please fill in your login details.</p>
 			{error}
@@ -132,6 +132,12 @@ const Login = ({ authenticate, token, error}) => {
 			>
 				LOGIN
 			</Button>
+		</React.Fragment>
+	);
+
+	return (
+		<form className={classes.Login} onSubmit={loginSubmitHandler}>
+			{loggingIn ? <LoadingIndicator/> : formContents}
 		</form>
 	);
 };
@@ -148,16 +154,17 @@ export const getServerSideProps = wrapper.getServerSideProps(
 		return {
 			props: {
 				token,
-				error
+				error,
 			},
 		};
 	}
 );
 
-const  mapStateToPros = (state) => {
+const mapStateToProps = (state) => {
 	return {
-		error: state.error
-	}
-}
+		error: state.error,
+		loggingIn: state.loggingIn,
+	};
+};
 
-export default connect(mapStateToPros, { authenticate })(Login);
+export default connect(mapStateToProps, { authenticate })(Login);

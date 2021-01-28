@@ -13,42 +13,49 @@ import axios from "../../../axios";
 export default function manageIndex(props) {
 	const router = useRouter();
 	const myServers = useRef();
+	const confirmDialogRef = useRef();
 
-    const [showConfirm, setShowConfirm] = useState(false);
-    const [deleteContext, setDeleteContext] = useState(null);
+	const [showConfirm, setShowConfirm] = useState(false);
+	const [deleteContext, setDeleteContext] = useState(null);
 
 	const deleteClickedHandler = (id) => {
-
-        setDeleteContext(id);
-        setShowConfirm(true);
-
+		setDeleteContext(id);
+		setShowConfirm(true);
 	};
 
 	const serverClickedHandler = (id) => {
 		router.push(`/server/${id}`);
-    };
-    
-    const confirmDialogCancelHandler = () => setShowConfirm(false);
+	};
 
+	const confirmDialogCancelHandler = () => {
+		setShowConfirm(false);
+	};
 
-    const confirmDialogConfirmHandler = () => {
-        
-		axios.delete(`/servers/${deleteContext}`).then((response) => {
-            
+	const confirmDialogConfirmHandler = async () => {
+        await axios.delete(`/servers/${deleteContext}`)
+        .then((response) => {
+			setDeleteContext(null);
+			setShowConfirm(false);
+			myServers.current.loadPage();
+        })
+        .catch(err => {
             setDeleteContext(null);
             setShowConfirm(false);
-			myServers.current.loadPage();
-		});
-    }
+        });
+	};
+
+	const sleep = (ms) => {
+		return new Promise((resolve) => setTimeout(resolve, ms));
+	};
 
 	return (
 		<Layout authenticated={props.token ? true : false}>
 			<ConfirmDialog
-                show={showConfirm}
+				show={showConfirm}
 				title="Are you sure?"
-                subtitle="You are about to delete your server listing, this cannot be undone"
-                cancel={confirmDialogCancelHandler}
-                confirm={confirmDialogConfirmHandler}
+				subtitle="You are about to delete your server listing, this cannot be undone"
+				cancel={confirmDialogCancelHandler}
+				confirm={confirmDialogConfirmHandler}
 			/>
 
 			<PagedTable
@@ -64,7 +71,9 @@ export default function manageIndex(props) {
 						<ManageServer
 							{...dataItem}
 							key={dataItem.id}
-							deleteClicked={() => deleteClickedHandler(dataItem.id)}
+							deleteClicked={() =>
+								deleteClickedHandler(dataItem.id)
+							}
 							// clicked={() => serverClickedHandler(dataItem.id)}
 						/>
 					);
