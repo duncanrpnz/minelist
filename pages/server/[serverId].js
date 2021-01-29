@@ -9,38 +9,22 @@ import LoadingIndicator from "../../components/UI/LoadingIndicator/LoadingIndica
 import Head from "next/head";
 
 export default function serverIndex(props) {
-	const router = useRouter();
-	const { serverId } = router.query;
+
 
 	const [server, setServer] = useState(null);
 
-	useEffect(() => {
-		let url = "/servers/" + serverId;
-
-		axios({
-			url: url,
-			method: "GET",
-		})
-			.then((result) => {
-				console.log(result.data[0]);
-
-				setServer(result.data[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, [serverId]);
-
 	let display = <LoadingIndicator />;
 
-	if (server) {
-		display = <ServerView {...server} />;
+	if (props.server) {
+		display = <ServerView {...props.server} />;
 	}
 
 	return (
 		<Layout authenticated={props.token ? true : false}>
 			<Head>
-				<title>MineList - Viewing {server ? server.name : "Server"}</title>
+				<title>
+					MineList - Viewing {props.server ? props.server.name : "Server"}
+				</title>
 				<meta
 					name="viewport"
 					content="initial-scale=1.0, width=device-width"
@@ -55,9 +39,22 @@ export const getServerSideProps = wrapper.getServerSideProps(
 		await checkServerSideCookie(context);
 		const token = context.store.getState().token;
 
+	
+		const { serverId } = context.query;
+
+		let url = "/servers/" + serverId;
+
+		const server = await axios({
+			url: url,
+			method: "GET",
+		})
+		.then((result) => result.data[0])
+		.catch((error) => console.log(error));
+
 		return {
 			props: {
 				token,
+				server
 			},
 		};
 	}
