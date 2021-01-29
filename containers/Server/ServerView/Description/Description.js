@@ -3,8 +3,8 @@ import Button from "../../../../components/UI/Button/Button";
 
 export const description = (props) => {
 	return (
-		<div className="container">
-			<div className="row pt-4">
+		<div className="container h-100 d-flex flex-column">
+			<div className="row pt-4 mb-3">
 				<div className="col-md-12 text-center">
 					<img
 						className="mb-4"
@@ -15,11 +15,11 @@ export const description = (props) => {
 
 			<div className="row">
 				<div className="col-md-12">
-					<p className="text-break text-justify">{props.description}</p>
+					<p className="text-break text-justify overflow-y-scroll">{props.description}</p>
 				</div>
 			</div>
 
-			<Button>Vote</Button>
+			<Button className="mt-auto">Vote</Button>
 		</div>
 	);
 };

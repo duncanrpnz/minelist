@@ -1,5 +1,8 @@
 @import 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css';
 
+html {
+  background: #f8f8f8;
+}
 body {
   margin: 0;
   padding: 0;
@@ -7,5 +10,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  margin-bottom: 70px;
 }
 
+form {
+  background: #FFF;
+  border: 1px solid #bbb;
+
+}

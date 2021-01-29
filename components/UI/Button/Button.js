@@ -9,7 +9,7 @@ const button = (props) => (
         className={[classes.Button, classes[props.type]].concat(props.className).join(' ')}
         onClick={props.clicked}>
         
-        {props.icon && <FontAwesomeIcon className={classes.Icon} icon={props.icon}/>}
+        {props.icon && <span className={classes.Icon} ><FontAwesomeIcon icon={props.icon}/></span>}
 
 
         {props.children && <span>{props.children}</span>}

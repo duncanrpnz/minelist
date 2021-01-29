@@ -1,6 +1,5 @@
 .Server {
-    height: 80px;
-    line-height: 80px;
+
     box-sizing: border-box;
 
     cursor: pointer;
@@ -13,10 +12,12 @@
 .Server td {
     padding: 10px;
     height: 100%;
+
+    vertical-align: middle;
 }
 
 .Server > td > img {
-    line-height: 80px;
+    width: 100%;
 }
 
 .Server .name {
@@ -33,4 +34,21 @@
 
 .Server .banner:hover {
     cursor: pointer;
+}
+
+
+.ServerIp {
+    background-color: #ddd;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 468px;
+    cursor: text;
+}
+
+.Rank {
+    background: #bdc3c7;
+    color: rgb(92, 92, 92);
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px 10px;
 }

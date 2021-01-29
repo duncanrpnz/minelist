@@ -11,8 +11,7 @@ const navigationItems = (props) => {
 
     return (
         <ul className={classes.NavigationItems}>
-            <NavigationItem click={() => router.push('/')}>Home</NavigationItem>
-            <NavigationItem click={() => router.push('/')}>Go Sponsored</NavigationItem>
+            {props.children}
         </ul>
     );
 }

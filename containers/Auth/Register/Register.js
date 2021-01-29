@@ -10,6 +10,7 @@ import { faPaperPlane, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { isEmail, isValidPassword } from "../../../shared/formValidation";
 import ReCAPTCHA from "react-google-recaptcha";
 import LoadingIndicator from "../../../components/UI/LoadingIndicator/LoadingIndicator";
+import MessageBox from "../../../components/UI/MessageBox/MessageBox";
 
 class Register extends Component {
 	state = {
@@ -188,7 +189,12 @@ class Register extends Component {
 					<React.Fragment>
 						<h2>Register</h2>
 						<p>Please fill in the below registration details.</p>
-						{this.state.errors && <div className="mb-3 text-danger">{this.state.errors.join(<br/>)}</div>}
+
+						{this.state.errors && (
+							<MessageBox>
+								{this.state.errors.join("<br/>")}
+							</MessageBox>
+						)}
 						{Object.keys(this.state.controls).map((controlKey) => {
 							const control = this.state.controls[controlKey];
 
@@ -217,7 +223,7 @@ class Register extends Component {
 							icon={faPaperPlane}
 							disabled={!this.state.formValid}
 						>
-							SUBMIT{" "}
+							Register{" "}
 						</Button>
 					</React.Fragment>
 				)}

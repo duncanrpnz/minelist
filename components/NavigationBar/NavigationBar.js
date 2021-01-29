@@ -2,72 +2,23 @@ import React, { Component } from "react";
 import classes from "./NavigationBar.module.css";
 
 import NavigationItems from "./NavigationItems/NavigationItems";
+import NavigationItem from "./NavigationItems/NavigationItem/NavigationItem";
 
 import { Input, Form, FormControl, Button } from "react-bootstrap";
 
 import { withRouter } from "next/router";
 
-import {connect} from "react-redux";
-
+import { connect } from "react-redux";
 
 import { deauthenticate } from "../../redux/actions/auth";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faSignOutAlt, faSignInAlt, faEdit, faPlus, faHome, faStar } from "@fortawesome/free-solid-svg-icons";
+
+
 class NavigationBar extends Component {
-
 	render() {
-
-        const router = this.props.router;
-
-		let buttons = (
-			<React.Fragment>
-				<Button
-					onClick={() => router.push("/login")}
-					className="mr-2"
-					type="submit"
-					variant="light"
-				>
-					Login
-				</Button>
-				<Button
-					onClick={() => router.push("/register")}
-					type="submit"
-					variant="light"
-				>
-					Register
-				</Button>
-			</React.Fragment>
-		);
-
-		if (this.props.authenticated) {
-			buttons = (
-				<React.Fragment>
-					<Button
-						onClick={() => router.push("/server/manage")}
-						className="mr-2"
-						type="submit"
-						variant="light"
-					>
-						Manage Servers
-					</Button>
-
-					<Button
-						onClick={() => router.push("/server/add")}
-						className="mr-2"
-						type="submit"
-						variant="light"
-					>
-						Add Server
-					</Button>
-					<Button
-						onClick={() => router.push("/logout")}
-						type="submit"
-						variant="light"
-					>
-						Logout
-					</Button>
-				</React.Fragment>
-			);
-		}
+		const router = this.props.router;
 
 		return (
 			<header
@@ -78,17 +29,64 @@ class NavigationBar extends Component {
 						<h3 className="mb-0">MineList</h3>
 					</div>
 
-					<nav className="ml-4">
-						<NavigationItems />
+					<nav className="ml-4 pt-1">
+						<NavigationItems>
+							<NavigationItem icon={faHome} click={() => router.push("/")}>
+								Home
+							</NavigationItem>
+							<NavigationItem icon={faStar} click={() => router.push("/")}>
+								Go Sponsored
+							</NavigationItem>
+						</NavigationItems>
 					</nav>
 
 					<div className="ml-auto d-flex align-items-center">
 						{/* <Button type="submit" variant='light'>Login</Button> */}
-						{buttons}
+
 						{/* <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                         <Button type="submit" variant='light'>Submit</Button>
                     </Form> */}
+
+						<nav className="ml-4 pt-1">
+							{this.props.authenticated ? (
+								<NavigationItems>
+									<NavigationItem
+										icon={faEdit}
+										click={() => router.push("/server/manage")}
+									>
+										Manage Servers
+									</NavigationItem>
+									<NavigationItem
+										icon={faPlus}
+										click={() => router.push("/server/add")}
+									>
+										Add Server
+									</NavigationItem>
+									<NavigationItem
+										icon={faSignOutAlt}
+										click={() => router.push("/logout")}
+									>
+										Logout
+									</NavigationItem>
+								</NavigationItems>
+							) : (
+								<NavigationItems>
+									<NavigationItem
+									icon={faSignInAlt}
+										click={() => router.push("/login")}
+									>
+										Login
+									</NavigationItem>
+									<NavigationItem
+										icon={faUser}
+										click={() => router.push("/register")}
+									>
+										Register
+									</NavigationItem>
+								</NavigationItems>
+							)}
+						</nav>
 					</div>
 				</div>
 			</header>

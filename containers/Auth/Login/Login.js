@@ -16,6 +16,7 @@ import Button from "../../../components/UI/Button/Button";
 import { faUser, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { isEmail, isValidPassword } from "../../../shared/formValidation";
 import LoadingIndicator from "../../../components/UI/LoadingIndicator/LoadingIndicator";
+import MessageBox from "../../../components/UI/MessageBox/MessageBox";
 
 const Login = ({ authenticate, token, loggingIn, error }) => {
 	console.log("Logging in state = " + loggingIn);
@@ -108,7 +109,7 @@ const Login = ({ authenticate, token, loggingIn, error }) => {
 		<React.Fragment>
 			<h2>Login</h2>
 			<p>Please fill in your login details.</p>
-			{error}
+
 			{Object.keys(state.controls).map((controlKey) => {
 				const control = state.controls[controlKey];
 
@@ -130,15 +131,19 @@ const Login = ({ authenticate, token, loggingIn, error }) => {
 				disabled={!formValid}
 				clicked={loginSubmitHandler}
 			>
-				LOGIN
+				Login
 			</Button>
 		</React.Fragment>
 	);
 
 	return (
-		<form className={classes.Login} onSubmit={loginSubmitHandler}>
-			{loggingIn ? <LoadingIndicator/> : formContents}
-		</form>
+		<React.Fragment>
+			<form className={classes.Login} onSubmit={loginSubmitHandler}>
+				{error && <MessageBox>{error}</MessageBox>}
+
+				{loggingIn ? <LoadingIndicator /> : formContents}
+			</form>
+		</React.Fragment>
 	);
 };
 

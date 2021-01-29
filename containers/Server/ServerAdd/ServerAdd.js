@@ -104,11 +104,11 @@ const serverAdd = (props) => {
 				touched: false,
 				validation: (value) => value.length > 100,
 			},
-			website: {
+			social_website: {
 				attributes: {
 					label: "Website",
-					id: "website",
-					name: "website",
+					id: "social_website",
+					name: "social_website",
 					value: "",
 					type: "website",
 					placeholder: "(optional)",
@@ -116,11 +116,11 @@ const serverAdd = (props) => {
 				valid: false,
 				touched: false,
 			},
-			discord: {
+			social_discord: {
 				attributes: {
 					label: "Discord",
-					id: "discord",
-					name: "discord",
+					id: "social_discord",
+					name: "social_discord",
 					value: "",
 					type: "discord",
 					placeholder: "(optional)",
@@ -319,7 +319,6 @@ const serverAdd = (props) => {
 						icon={faPlusSquare}
 						disabled={!formValid}
 						clicked={addServerHandler}
-						className="w-100"
 					>
 						ADD
 					</Button>
@@ -328,7 +327,6 @@ const serverAdd = (props) => {
 						icon={faSave}
 						disabled={!formValid}
 						clicked={addServerHandler}
-						className="w-100"
 					>
 						UPDATE
 					</Button>

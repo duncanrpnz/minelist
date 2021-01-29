@@ -28,7 +28,7 @@ export default function manageIndex(props) {
 		router.push(`/server/manage/${id}`);
 	};
 
-	const serverClickedHandler = (id) => {
+	const viewClickedHandler = (id) => {
 		router.push(`/server/${id}`);
 	};
 
@@ -90,6 +90,7 @@ export default function manageIndex(props) {
 								deleteClickedHandler(dataItem.id)
 							}
 							editClicked={() => editClickedHandler(dataItem.id)}
+							viewClicked={() => viewClickedHandler(dataItem.id)}
 							// clicked={() => serverClickedHandler(dataItem.id)}
 						/>
 					);
