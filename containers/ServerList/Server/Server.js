@@ -23,19 +23,25 @@ class Server extends Component {
 
 		const link = `/server/${this.props.id}`;
 
+		let rankClasses = [classes.Rank];
+
+		if(this.props.sponsored) {
+			rankClasses.push(classes.Sponsored);
+		}
+
 		return (
 			<tr
 				className={[classes.Server].join(" ")}
 				
 			>
-				<td className="text-center">
-					<span className={classes.Rank}>{this.props.rank}</span>
+				<td className="text-center" width="8%">
+					<span className={rankClasses.join(' ')}>{rank}</span>
 				</td>
-				<td className={[classes.name, "text-left"].join(" ")} >
+				<td className={[classes.name, "text-left"].join(" ")} width="18%">
 					<strong onClick={() => this.props.clicked(this.props.id)}>{this.props.name}</strong>
 				</td>
 				<td width="468px">
-					<div className="row">
+					<div className="row text-center">
 						<img
 							className={classes.banner}
 							src={`${process.env.NEXT_PUBLIC_api}servers/${this.props.id}/banner`}
@@ -47,10 +53,10 @@ class Server extends Component {
 						{this.props.ip}
 					</div>
 				</td>
-				<td className="text-center">
+				<td className="" width="5%">
 					{this.props.players_online}/{this.props.max_players ?? 20}
 				</td>
-				<td className="text-center">
+				<td className="text-center" width="15%">
 					<StatusIndicator online={this.props.online} />
 				</td>
 			</tr>
