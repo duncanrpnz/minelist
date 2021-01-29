@@ -10,6 +10,7 @@ import ConfirmDialog from "../../../components/UI/ConfirmDialog/ConfirmDialog";
 import Button from "../../../components/UI/Button/Button";
 
 import axios from "../../../axios";
+import Head from "next/head";
 
 export default function manageIndex(props) {
 	const router = useRouter();
@@ -56,6 +57,14 @@ export default function manageIndex(props) {
 
 	return (
 		<Layout authenticated={props.token ? true : false}>
+			<Head>
+				<title>MineList - My Servers</title>
+				<meta
+					name="viewport"
+					content="initial-scale=1.0, width=device-width"
+				/>
+			</Head>
+
 			<ConfirmDialog
 				show={showConfirm}
 				title="Are you sure?"
@@ -73,8 +82,13 @@ export default function manageIndex(props) {
 						<h5 className="mx-auto">
 							You have not posted any servers yet.
 						</h5>
-
-						<br /> <Button className="mt-4 w-auto" clicked={() => router.push('/server/add')}>Add Server</Button>
+						<br />{" "}
+						<Button
+							className="mt-4 w-auto"
+							clicked={() => router.push("/server/add")}
+						>
+							Add Server
+						</Button>
 					</p>
 				}
 				page={1}

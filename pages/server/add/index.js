@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import Layout from "../../../hoc/Layout/Layout";
 import ServerAdd from "../../../containers/Server/ServerAdd/ServerAdd";
 
+import Head from "next/head";
+
 export default function addServerIndex(props) {
 	// const router = useRouter();
 
@@ -16,14 +18,21 @@ export default function addServerIndex(props) {
 
 	return (
 		<Layout authenticated={props.token ? true : false}>
-			<ServerAdd/>
+			<Head>
+				<title>MineList - Add Server</title>
+				<meta
+					name="viewport"
+					content="initial-scale=1.0, width=device-width"
+				/>
+			</Head>
+			<ServerAdd />
 		</Layout>
 	);
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
-        await checkServerSideCookie(context);
+		await checkServerSideCookie(context);
 
 		const token = context.store.getState().token;
 
