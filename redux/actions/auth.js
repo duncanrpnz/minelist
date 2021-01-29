@@ -26,11 +26,6 @@ export const authenticate = (user) => (dispatch) => {
 			if (response.code === 200) {
 				setCookie("token", response.token);
 
-				setTimeout(() => {
-					dispatch(deauthenticate());
-					dispatch(loggingInFinish());
-				}, 60 * 1000);
-
 				Router.push("/");
 				dispatch({ type: AUTHENTICATE, payload: response.token });
 				dispatch(loggingInFinish());
