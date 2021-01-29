@@ -3,7 +3,7 @@ import Button from "../../../../components/UI/Button/Button";
 
 export const description = (props) => {
 	return (
-		<div class="container">
+		<div className="container">
 			<div className="row pt-4">
 				<div className="col-md-12 text-center">
 					<img

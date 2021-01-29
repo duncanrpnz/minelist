@@ -23,13 +23,15 @@ const input = (props) => {
 	);
 
 	if (props.attributes.type === "select") {
+		console.log("redrawing select, " + props.attributes.value);
 		input = (
 			<select
 				className={inputClasses.join(" ")}
 				{...props.attributes}
+				value={props.attributes.value}
 				onChange={props.changed}
 			>
-				<option value={null}>{props.defaultOption}</option>
+				<option value={props.defaultOption}>{props.defaultOption}</option>
 				{props.options.map((option, i) => {
 					let text = option;
 					let value = option;
@@ -39,8 +41,9 @@ const input = (props) => {
 						value = option.value;
 					}
 
+		
 					return (
-						<option key={i} value={value}>
+						<option key={i} value={value} selected={value === props.attributes.value ? "selected" : null}> 
 							{text}
 						</option>
 					);

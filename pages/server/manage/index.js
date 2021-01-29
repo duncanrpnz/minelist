@@ -7,6 +7,7 @@ import Layout from "../../../hoc/Layout/Layout";
 import PagedTable from "../../../components/PagedTable/PagedTable";
 import ManageServer from "../../../components/Server/ManageServer/ManageServer";
 import ConfirmDialog from "../../../components/UI/ConfirmDialog/ConfirmDialog";
+import Button from "../../../components/UI/Button/Button";
 
 import axios from "../../../axios";
 
@@ -21,11 +22,11 @@ export default function manageIndex(props) {
 	const deleteClickedHandler = (id) => {
 		setDeleteContext(id);
 		setShowConfirm(true);
-    };
-    
-    const editClickedHandler = (id) => {
-        router.push(`/server/manage/${id}`);
-    };
+	};
+
+	const editClickedHandler = (id) => {
+		router.push(`/server/manage/${id}`);
+	};
 
 	const serverClickedHandler = (id) => {
 		router.push(`/server/${id}`);
@@ -36,16 +37,17 @@ export default function manageIndex(props) {
 	};
 
 	const confirmDialogConfirmHandler = async () => {
-        await axios.delete(`/servers/${deleteContext}`)
-        .then((response) => {
-			setDeleteContext(null);
-			setShowConfirm(false);
-			myServers.current.loadPage();
-        })
-        .catch(err => {
-            setDeleteContext(null);
-            setShowConfirm(false);
-        });
+		await axios
+			.delete(`/servers/${deleteContext}`)
+			.then((response) => {
+				setDeleteContext(null);
+				setShowConfirm(false);
+				myServers.current.loadPage();
+			})
+			.catch((err) => {
+				setDeleteContext(null);
+				setShowConfirm(false);
+			});
 	};
 
 	const sleep = (ms) => {
@@ -66,6 +68,15 @@ export default function manageIndex(props) {
 				ref={myServers}
 				title="My Servers"
 				url="/servers/myservers"
+				noDataMsg={
+					<p className="col-md-6 offset-md-3 text-center">
+						<h5 className="mx-auto">
+							You have not posted any servers yet.
+						</h5>
+
+						<br /> <Button className="mt-4 w-auto" clicked={() => router.push('/server/add')}>Add Server</Button>
+					</p>
+				}
 				page={1}
 				pageSize={5}
 				maxButtonsCount={6}
@@ -75,8 +86,10 @@ export default function manageIndex(props) {
 						<ManageServer
 							{...dataItem}
 							key={dataItem.id}
-							deleteClicked={() => deleteClickedHandler(dataItem.id)}
-                            editClicked={() => editClickedHandler(dataItem.id)}
+							deleteClicked={() =>
+								deleteClickedHandler(dataItem.id)
+							}
+							editClicked={() => editClickedHandler(dataItem.id)}
 							// clicked={() => serverClickedHandler(dataItem.id)}
 						/>
 					);

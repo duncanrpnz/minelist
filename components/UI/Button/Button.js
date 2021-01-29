@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const button = (props) => (
     <button 
         disabled={props.disabled}
-        className={[classes.Button, classes[props.type]].join(' ')}
+        className={[classes.Button, classes[props.type]].concat(props.className).join(' ')}
         onClick={props.clicked}>
         
         {props.icon && <FontAwesomeIcon className={classes.Icon} icon={props.icon}/>}

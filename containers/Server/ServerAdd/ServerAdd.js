@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import classes from "./ServerAdd.module.css";
 import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button/Button";
-import { faPlusSquare, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPlusSquare, faSearch, faSave } from "@fortawesome/free-solid-svg-icons";
 import Countries from "../../../shared/countries";
 import axios from "../../../axios";
 import LoadingIndicator from "../../../components/UI/LoadingIndicator/LoadingIndicator";
@@ -22,6 +22,7 @@ const serverAdd = (props) => {
 	const [errors, setErrors] = useState(null);
 
 	useEffect(() => {
+		//Update mode
 		if (props.id) {
 			setLoading(true);
 
@@ -29,16 +30,15 @@ const serverAdd = (props) => {
 			axios.get(`/servers/${props.id}`).then((result) => {
 				const data = result.data[0];
 
+				console.log(data);
+
 				const controls = { ...state.controls };
 
-				controls.name.attributes.value = data.name ?? "";
-				controls.host.attributes.value = data.ip ?? "";
-				controls.port.attributes.value = data.port ?? "25565";
-				controls.description.attributes.value = data.description ?? "";
-				controls.website.attributes.value = data.social_website ?? "";
-				controls.discord.attributes.value = data.social_discord ?? "";
-				controls.country.attributes.value = data.country;
-				controls.file.attributes.value = data.banner;
+				Object.keys(data).forEach((key) => {
+					if (controls[key]) {
+						formInputChangedHandler(null, key, data[key]);
+					}
+				});
 
 				setState({
 					...state,
@@ -57,25 +57,25 @@ const serverAdd = (props) => {
 					label: "Server Name",
 					id: "name",
 					name: "name",
-					value: "1",
+					value: "",
 					type: "name",
 					placeholder: "The name of your server",
 				},
-				valid: true,
-				touched: true,
+				valid: false,
+				touched: false,
 				validation: (text) => text.length > 0,
 			},
-			host: {
+			ip: {
 				attributes: {
 					label: "Server IP / Host name",
-					id: "host",
-					name: "host",
-					value: "1",
-					type: "host",
+					id: "ip",
+					name: "ip",
+					value: "",
+					type: "ip",
 					placeholder: "e.g. myserver.myhost.com",
 				},
-				valid: true,
-				touched: true,
+				valid: false,
+				touched: false,
 				validation: (value) => value.length > 0,
 			},
 			port: {
@@ -89,7 +89,7 @@ const serverAdd = (props) => {
 				},
 				valid: true,
 				touched: true,
-				validation: (value) => value.length > 0 && !isNaN(value),
+				validation: (value) => !isNaN(parseInt(value)),
 			},
 			description: {
 				attributes: {
@@ -100,8 +100,8 @@ const serverAdd = (props) => {
 					type: "textarea",
 					placeholder: "Describe your server",
 				},
-				valid: true,
-				touched: true,
+				valid: false,
+				touched: false,
 				validation: (value) => value.length > 100,
 			},
 			website: {
@@ -109,24 +109,24 @@ const serverAdd = (props) => {
 					label: "Website",
 					id: "website",
 					name: "website",
-					value: "test.com",
+					value: "",
 					type: "website",
-					placeholder: "",
+					placeholder: "(optional)",
 				},
-				valid: true,
-				touched: true,
+				valid: false,
+				touched: false,
 			},
 			discord: {
 				attributes: {
 					label: "Discord",
 					id: "discord",
 					name: "discord",
-					value: "gg.com",
+					value: "",
 					type: "discord",
-					placeholder: "",
+					placeholder: "(optional)",
 				},
-				valid: true,
-				touched: true,
+				valid: false,
+				touched: false,
 			},
 			country: {
 				attributes: {
@@ -137,16 +137,16 @@ const serverAdd = (props) => {
 					type: "select",
 				},
 				options: Countries,
-				defaultOption: "New Zealand",
-				valid: true,
-				touched: true,
-				validation: (value) => value !== "Please select your country",
+				defaultOption: "Please select a country",
+				valid: false,
+				touched: false,
+				validation: (value) => value !== "Please select a country",
 			},
-			file: {
+			banner: {
 				attributes: {
 					label: "Banner (Resolution: 468x60)",
-					id: "file",
-					name: "file",
+					id: "banner",
+					name: "banner",
 					checked: false,
 					type: "fileUpload",
 				},
@@ -156,19 +156,29 @@ const serverAdd = (props) => {
 		},
 	});
 
-	const formInputChangedHandler = (e) => {
-		const element = e.target.id;
-		const elementVal = e.target.value;
+	const formInputChangedHandler = (e, name, value) => {
+		let element = null;
+		let elementVal = null;
 
+		if (e && !name) {
+			element = e.target.id;
+			elementVal = e.target.value;
+		} else {
+			element = name;
+			elementVal = value;
+		}
+
+		console.log(element + " => " + elementVal);
 		let controlsState = { ...state.controls };
 
 		let control = controlsState[element];
 
 		control.touched = true;
+
 		control.attributes.value = elementVal;
 
 		if (control.validation) {
-			control.valid = control.validation(elementVal);
+			control.valid = (elementVal ? control.validation(elementVal) : false);
 		}
 
 		checkIsFormValid();
@@ -181,7 +191,7 @@ const serverAdd = (props) => {
 
 	const formFileSetHandler = (fileData) => {
 		const controlsState = { ...state.controls };
-		controlsState.file.attributes.value = fileData;
+		controlsState.banner.attributes.value = fileData;
 
 		setFormFileData(fileData);
 
@@ -224,7 +234,7 @@ const serverAdd = (props) => {
 				.post("/servers", data)
 				.then((response) => {
 					if (response.data.code === 201) {
-						props.router.replace("/");
+						props.router.replace("/server/manage");
 					}
 
 					if (response.data.code === 400) {
@@ -272,10 +282,11 @@ const serverAdd = (props) => {
 			{loading && <LoadingIndicator />}
 
 			<div className={formClasses.join(" ")}>
-				<h2>Add Your Server</h2>
+				<h2>{!props.id ? "Add your server" : "Update your server"}</h2>
+				
 				<p>
-					Please fill in all required details in order to post your
-					server.
+					{!props.id ? "Please fill in all required details in order to post your server."
+					: "Please fill in all required details in order to update your server."}
 				</p>
 
 				{errors && <p className="red">{errors.join("<br/>")}</p>}
@@ -303,13 +314,25 @@ const serverAdd = (props) => {
 					);
 				})}
 
-				<Button
-					icon={faPlusSquare}
-					disabled={!formValid}
-					clicked={addServerHandler}
-				>
-					ADD
-				</Button>
+				{!props.id ? (
+					<Button
+						icon={faPlusSquare}
+						disabled={!formValid}
+						clicked={addServerHandler}
+						className="w-100"
+					>
+						ADD
+					</Button>
+				) : (
+					<Button
+						icon={faSave}
+						disabled={!formValid}
+						clicked={addServerHandler}
+						className="w-100"
+					>
+						UPDATE
+					</Button>
+				)}
 			</div>
 		</form>
 	);
