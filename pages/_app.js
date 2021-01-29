@@ -8,6 +8,7 @@ function MyApp({ Component, pageProps }) {
 		<html>
 			<head>
 				<title>Minelist - Your minecraft server list</title>
+
 			</head>
 			<Component {...pageProps} />
 		</html>
