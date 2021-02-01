@@ -20,3 +20,9 @@
     border: 1px solid maroon;
     color: rgb(255, 255, 255);
 }
+
+.Success {
+    background-color: rgb(129, 173, 72);
+    border: 1px solid rgb(83, 128, 0);
+    color: rgb(255, 255, 255);
+}

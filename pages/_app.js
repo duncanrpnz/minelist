@@ -3,15 +3,20 @@ import React, { useEffect, useState } from "react";
 
 import { wrapper } from "../redux";
 
+import Head from "next/head";
+
 function MyApp({ Component, pageProps }) {
 	return (
-		<html>
-			<head>
-				<title>Minelist - Your minecraft server list</title>
-
-			</head>
+		<React.Fragment>
+			<Head>
+				<title>MineList - Your minecraft server list</title>
+				<meta
+					name="viewport"
+					content="initial-scale=1.0, width=device-width"
+				/>
+			</Head>
 			<Component {...pageProps} />
-		</html>
+		</React.Fragment>
 	);
 }
 

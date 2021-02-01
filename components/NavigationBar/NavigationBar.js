@@ -29,7 +29,7 @@ class NavigationBar extends Component {
 						<h3 className="mb-0">MineList</h3>
 					</div>
 
-					<nav className="ml-4 pt-1">
+					<nav className="ml-4">
 						<NavigationItems>
 							<NavigationItem icon={faHome} click={() => router.push("/")}>
 								Home
@@ -48,7 +48,7 @@ class NavigationBar extends Component {
                         <Button type="submit" variant='light'>Submit</Button>
                     </Form> */}
 
-						<nav className="ml-4 pt-1">
+						<nav className="ml-4">
 							{this.props.authenticated ? (
 								<NavigationItems>
 									<NavigationItem

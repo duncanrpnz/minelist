@@ -2,6 +2,9 @@ import React from "react";
 import Button from "../../../../components/UI/Button/Button";
 
 export const description = (props) => {
+
+	console.log(props.voteClicked);
+	
 	return (
 		<div className="container h-100 d-flex flex-column">
 			<div className="row pt-4 mb-3">
@@ -19,7 +22,7 @@ export const description = (props) => {
 				</div>
 			</div>
 
-			<Button className="mt-auto">Vote</Button>
+			<Button className="mt-auto" clicked={props.voteClicked}>Vote</Button>
 		</div>
 	);
 };

@@ -7,6 +7,7 @@ import Layout from "../../hoc/Layout/Layout";
 import ServerView from "../../containers/Server/ServerView/ServerView";
 import LoadingIndicator from "../../components/UI/LoadingIndicator/LoadingIndicator";
 import Head from "next/head";
+import Moment from "moment";
 
 export default function serverIndex(props) {
 
@@ -40,6 +41,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 		const token = context.store.getState().token;
 
 	
+
 		const { serverId } = context.query;
 
 		let url = "/servers/" + serverId;

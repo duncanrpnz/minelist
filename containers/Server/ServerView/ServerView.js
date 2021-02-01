@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {useRouter} from "next/router";
 import classes from "./ServerView.module.css";
 import Moment from "moment";
 
@@ -8,25 +9,37 @@ import Button from "../../../components/UI/Button/Button";
 import Description from "./Description/Description";
 import Stats from "./Stats/Stats";
 
+import MessageBox from "../../../components/UI/MessageBox/MessageBox";
+
 const serverView = (props) => {
 	const classesArr = ["container-fluid", "d-flex", classes.Toolbar];
     const rowClasses = ["row", classes.ServerPropertyRow];
-    
-    const [selectedTab, setSelectedTab] = useState(<Description {...props}/>)
+    const router = useRouter();
+	
+    const voteButtonClicked = () => {
+		
+		router.push(`/server/${router.query.serverId}/vote`);
+	};
 
-    
+	const [selectedTab, setSelectedTab] = useState(<Description {...props} voteClicked={voteButtonClicked}/>)
+
+	const [voted, setVoted] = useState(router.query.voted);
+
 	return (
 		<React.Fragment>
+			{voted && <MessageBox type="Success">Thanks for voting!</MessageBox>}
+
 			<div className={classesArr.join(" ")}>
+				
 				<div className="d-flex align-items-center flex-grow flex-flow-row p-3">
 					<h3 className="mb-0">{props.name}</h3>
 				</div>
 
 				<div className="d-flex h-100">
 					<ul className={classes.Tabs}>
-						<li className={classes.TabItem} onClick={() => setSelectedTab(<Description {...props}/>)}>Description</li>
+						<li className={classes.TabItem} onClick={() => setSelectedTab(<Description {...props} voteClicked={voteButtonClicked}/>)}>Description</li>
 						<li className={classes.TabItem} onClick={() => setSelectedTab(<Stats serverId={props.id}/>)}>Stats</li>
-						<li className={classes.TabItem}>Widget</li>
+						{/* <li className={classes.TabItem}>Widget</li> */}
 					</ul>
 				</div>
 			</div>
