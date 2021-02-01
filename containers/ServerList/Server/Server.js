@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faStar,
 	faSpinner,
-	faWifi,
+	faPlug,
 	faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
@@ -49,7 +49,7 @@ class Server extends Component {
 						/>
 					</div>
 					<div className={["row", "text-right", classes.ServerIp].join(" ")}>
-						<FontAwesomeIcon icon={faWifi} size="1x" className="mr-2 ml-1"/>
+						<FontAwesomeIcon icon={faPlug} size="1x" className="mr-2 ml-1 mt-1"/>
 						{this.props.ip}
 					</div>
 				</td>

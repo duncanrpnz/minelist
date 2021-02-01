@@ -8,13 +8,6 @@ import ServerAdd from "../../../containers/Server/ServerAdd/ServerAdd";
 import Head from "next/head";
 
 export default function addServerIndex(props) {
-	// const router = useRouter();
-
-	// if(!props.token) {
-	//     console.log('No auth');
-
-	//     router.push('./auth/login');
-	// }
 
 	return (
 		<Layout authenticated={props.token ? true : false}>
@@ -34,7 +27,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
 		await checkServerSideCookie(context);
 
-		const token = context.store.getState().token;
+		const token = context.store.getState().authReducer.token;
 
 		if (!token) {
 			context.res.writeHead(302, { Location: "/login" });

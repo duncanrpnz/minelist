@@ -16,6 +16,7 @@
     "bootstrap": "^4.5.3",
     "create-react-class": "^15.7.0",
     "dotenv-webpack": "^6.0.0",
+    "flat-combine-reducers": "^0.1.2",
     "js-cookie": "^2.2.1",
     "moment": "^2.29.1",
     "next": "^10.0.5",

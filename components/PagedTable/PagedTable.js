@@ -78,7 +78,7 @@ class PagedTable extends Component {
 					<tr>
 						<td colSpan="100%">
 							<div className="pt-5 text-center">
-								<h5>{this.props.noDataMsg ?? "No data to display"}</h5>
+								{this.props.noDataMsg ?? <h5>No data to display</h5>}
 							</div>
 						</td>
 					</tr>

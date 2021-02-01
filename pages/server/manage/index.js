@@ -78,7 +78,7 @@ export default function manageIndex(props) {
 				title="My Servers"
 				url="/servers/myservers"
 				noDataMsg={
-					<p className="col-md-6 offset-md-3 text-center">
+					<div className="col-md-6 offset-md-3 text-center">
 						<h5 className="mx-auto">
 							You have not posted any servers yet.
 						</h5>
@@ -89,7 +89,7 @@ export default function manageIndex(props) {
 						>
 							Add Server
 						</Button>
-					</p>
+					</div>
 				}
 				page={1}
 				pageSize={5}
@@ -118,7 +118,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
 		await checkServerSideCookie(context);
 
-		const token = context.store.getState().token;
+		const token = context.store.getState().authReducer.token;
 
 		if (!token) {
 			context.res.writeHead(302, { Location: "/login" });

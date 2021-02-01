@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {useRouter} from "next/router";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import classes from "./ServerView.module.css";
 import Moment from "moment";
 
@@ -11,34 +11,66 @@ import Stats from "./Stats/Stats";
 
 import MessageBox from "../../../components/UI/MessageBox/MessageBox";
 
+import { connect } from "react-redux";
+import { JUST_VOTED_CLEAR } from "../../../redux/actionTypes";
+
 const serverView = (props) => {
 	const classesArr = ["container-fluid", "d-flex", classes.Toolbar];
-    const rowClasses = ["row", classes.ServerPropertyRow];
-    const router = useRouter();
-	
-    const voteButtonClicked = () => {
-		
+	const rowClasses = ["row", classes.ServerPropertyRow];
+	const router = useRouter();
+
+	const voteButtonClicked = () => {
 		router.push(`/server/${router.query.serverId}/vote`);
 	};
 
-	const [selectedTab, setSelectedTab] = useState(<Description {...props} voteClicked={voteButtonClicked}/>)
+	const [selectedTab, setSelectedTab] = useState(
+		<Description {...props} voteClicked={voteButtonClicked} />
+	);
 
-	const [voted, setVoted] = useState(router.query.voted);
+	const justVoted = props.justVoted;
+
+	useEffect(() => {
+		if (props.justVoted) {
+			return () => {
+				props.onJustVotedClear();
+			};
+		}
+	}, []);
 
 	return (
 		<React.Fragment>
-			{voted && <MessageBox type="Success">Thanks for voting!</MessageBox>}
+			{justVoted && (
+				<MessageBox type="Success">Thanks for voting!</MessageBox>
+			)}
 
 			<div className={classesArr.join(" ")}>
-				
 				<div className="d-flex align-items-center flex-grow flex-flow-row p-3">
 					<h3 className="mb-0">{props.name}</h3>
 				</div>
 
 				<div className="d-flex h-100">
 					<ul className={classes.Tabs}>
-						<li className={classes.TabItem} onClick={() => setSelectedTab(<Description {...props} voteClicked={voteButtonClicked}/>)}>Description</li>
-						<li className={classes.TabItem} onClick={() => setSelectedTab(<Stats serverId={props.id}/>)}>Stats</li>
+						<li
+							className={classes.TabItem}
+							onClick={() =>
+								setSelectedTab(
+									<Description
+										{...props}
+										voteClicked={voteButtonClicked}
+									/>
+								)
+							}
+						>
+							Description
+						</li>
+						<li
+							className={classes.TabItem}
+							onClick={() =>
+								setSelectedTab(<Stats serverId={props.id} />)
+							}
+						>
+							Stats
+						</li>
 						{/* <li className={classes.TabItem}>Widget</li> */}
 					</ul>
 				</div>
@@ -155,11 +187,23 @@ const serverView = (props) => {
 
 				{/* Tabs Content */}
 				<div className="col-md-8 d-flex flex-column justify-content-between align-items-center">
-                    {selectedTab}
+					{selectedTab}
 				</div>
 			</div>
 		</React.Fragment>
 	);
 };
 
-export default serverView;
+const mapStateToProps = (state) => {
+
+	return {
+		justVoted: state.globalReducer.justVoted,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onJustVotedClear: () => dispatch({ type: JUST_VOTED_CLEAR }),
+	};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(serverView);

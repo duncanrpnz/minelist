@@ -27,7 +27,7 @@ export const authenticate = (user) => (dispatch) => {
 				setCookie("token", response.token);
 
 				Router.push("/");
-				dispatch({ type: AUTHENTICATE, payload: response.token });
+				dispatch({ type: AUTHENTICATE, payload: response.authReducer.token });
 				dispatch(loggingInFinish());
 			} else {
 				dispatch({ type: AUTHENTICATE_FAIL, payload: response.error });
@@ -35,7 +35,6 @@ export const authenticate = (user) => (dispatch) => {
 			}
 		})
 		.catch((err) => {
-			console.log("Auth error: " + err);
 			dispatch(loggingInFinish());
 		});
 };
@@ -71,6 +70,7 @@ export const deauthenticate = () => {
 export const checkServerSideCookie = async (ctx) => {
 	const token = getCookie("token", ctx.req);
 
+
 	if (token) {
 		const sessionResponse = await axios.post("/auth/verify", {
 			token: token,
@@ -78,7 +78,8 @@ export const checkServerSideCookie = async (ctx) => {
 
 		const { session_valid } = sessionResponse.data;
 
-		if (session_valid == true) {
+
+		if (session_valid === true) {
 			ctx.store.dispatch(reauthenticate(token));
 		} else {
 			ctx.store.dispatch(deauthenticate());

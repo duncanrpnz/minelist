@@ -10,6 +10,8 @@ import Server from "../containers/ServerList/Server/Server";
 import PagedTable from "../components/PagedTable/PagedTable";
 import Layout from "../hoc/Layout/Layout";
 
+import store from "../redux";
+
 export default function Home(props) {
 
 	const router = useRouter();
@@ -67,7 +69,10 @@ export default function Home(props) {
 export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
 	  await checkServerSideCookie(context);
-	  const token = context.store.getState().token;
+
+
+	  const token = context.store.getState().authReducer.token;
+
 
 	  return {
 		props: {

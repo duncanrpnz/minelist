@@ -38,7 +38,7 @@ export default function serverIndex(props) {
 export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
 		await checkServerSideCookie(context);
-		const token = context.store.getState().token;
+		const token = context.store.getState().authReducer.token;
 
 	
 

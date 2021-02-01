@@ -6,9 +6,7 @@ const initialState = { token: null, error: null, loggingIn: false };
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case HYDRATE:
-      return {
-        ...action.payload
-      };
+      return {...state, ...action.payload['authReducer']};
     case AUTHENTICATE:
       return { ...state, token: action.payload };
     case LOGIN_START:

@@ -50,10 +50,10 @@
     color: rgb(92, 92, 92);
     border-radius: 4px;
     font-weight: bold;
-    padding: 10px 10px;
+    padding: 10px 12px;
 }
 
 .Sponsored {
-    background-color: goldenrod;
+    background-color: rgb(238, 181, 36);
     color: #FFF;
 }

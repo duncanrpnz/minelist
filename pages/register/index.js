@@ -24,7 +24,7 @@ const registerIndex = (props) => {
 export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
 		checkServerSideCookie(context);
-		const token = context.store.getState().token;
+		const token = context.store.getState().authReducer.token;
 
 		return {
 			props: {

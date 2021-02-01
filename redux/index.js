@@ -4,6 +4,8 @@ import thunkMiddleware from "redux-thunk";
 import reducer from "./reducers";
 import { createWrapper } from "next-redux-wrapper";
 import Axios from "../axios";
+import { config } from "@fortawesome/fontawesome-svg-core";
+
 
 const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== "production") {
@@ -18,9 +20,11 @@ const interceptor = (store) => {
       (conf) => {
           const state = store.getState();
  
-          if(!conf.headers['Authorization']){
-              conf.headers["Authorization"] = `Bearer ${state.token}`
+          if(!conf.headers['Authorization'] && state.authReducer.token){
+
+              conf.headers["Authorization"] = `Bearer ${state.authReducer.token}`
           }
+
 
           return conf;
       },

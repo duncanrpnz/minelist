@@ -11,6 +11,10 @@ import axiosApi from "../../../axios";
 import MessageBox from "../../../components/UI/MessageBox/MessageBox";
 import LoadingIndicator from "../../../components/UI/LoadingIndicator/LoadingIndicator";
 
+import { connect } from "react-redux";
+
+import { JUST_VOTED } from "../../../redux/actionTypes";
+
 const serverVoteIndex = (props) => {
 	const router = useRouter();
 
@@ -46,6 +50,8 @@ const serverVoteIndex = (props) => {
 		},
 	});
 
+
+
 	const formInputChangedHandler = (e) => {
 		const element = e.target.id;
 		const elementVal = e.target.value;
@@ -80,7 +86,6 @@ const serverVoteIndex = (props) => {
 
 		formValid = formValid && recaptchaValue;
 
-		console.log("Form valid = " + formValid);
 		setFormIsValid(formValid);
 	};
 
@@ -114,10 +119,16 @@ const serverVoteIndex = (props) => {
 			.post(`/servers/${props.id}/vote`, data)
 			.then((result) => {
 				if (result.status === 200 && !result.data.error) {
-					router.push({
-						pathname: `/server/${props.id}?voted`,
-						query: { voted: true },
-					});
+                    new Promise((resolve, reject) => {
+                        props.onJustVoted();
+                        resolve();
+                    }).then(() => {
+                        router.push({
+                            pathname: `/server/${props.id}`,
+                        });
+                    });
+                    
+                    
 				} else {
 					if (result.data.error) {
 						setError(result.data.error);
@@ -132,7 +143,7 @@ const serverVoteIndex = (props) => {
 
 	return (
 		<div className="container">
-			<div class="col-md-6 offset-md-3">
+			<div className="col-md-6 offset-md-3">
 				{error && <MessageBox>{error}</MessageBox>}
 				<form className="p-4">
 					{loading ? (
@@ -198,4 +209,16 @@ const serverVoteIndex = (props) => {
 	);
 };
 
-export default serverVoteIndex;
+const mapStateToProps = (state) => {
+    return {
+        justVoted: state.globalReducer.justVoted
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onJustVoted: () => dispatch({ type: JUST_VOTED }),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(serverVoteIndex);

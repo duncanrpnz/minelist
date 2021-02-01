@@ -1,13 +1,19 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo, faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faInfo, faExclamation, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./MessageBox.module.css";
 
 const messageBox = (props) => {
 
 	const type = classes[props.type] ?? classes.Danger;
+
+    let icon = faExclamation;
+
+    if(props.type === "Success") {
+        icon = faCheck;
+    }
 
 	return (
 		<div
@@ -16,7 +22,7 @@ const messageBox = (props) => {
 				.join(" ")}
 		>
 			<span className={classes.Icon}>
-				<FontAwesomeIcon icon={faExclamation} />
+				<FontAwesomeIcon icon={icon} />
 			</span>
 
 			<span className={classes.Text}>{props.children}</span>

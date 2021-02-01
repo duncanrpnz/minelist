@@ -24,8 +24,12 @@ const login = (props) => (
 export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
 		checkServerSideCookie(context);
-		const token = context.store.getState().token;
 
+		console.log(context.store.getState());
+
+		const token = context.store.getState().authReducer.token;
+
+	
 		return {
 			props: {
 				token,

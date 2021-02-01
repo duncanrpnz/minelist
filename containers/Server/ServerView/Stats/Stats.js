@@ -24,9 +24,6 @@ const stats = (props) => {
 		axios
 			.get(`/servers/${props.serverId}/stats`)
 			.then((result) => {
-				console.log("Loaded data: ", result.data);
-				console.log("We want data: ", result.data[viewMetric]);
-
 				setLatestData(result.data);
 			})
 			.catch((err) => {

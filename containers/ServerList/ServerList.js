@@ -85,7 +85,6 @@ class ServerList extends Component {
 		let displayArrowsLeft = false;
 		let displayArrowsRight = true;
 
-        console.log("Total pages: ", totalPages);
 		if (totalPages > 1) {
 			if (
 				currentPage >= maxPageButtons - 2 &&

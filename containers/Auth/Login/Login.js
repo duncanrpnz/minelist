@@ -153,7 +153,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
 		const currentState = context.store.getState();
 
-		const token = currentState.token;
+	
+		console.log(currentState);
+
+		const token = currentState.authReducer.token;
 		const error = currentState.error;
 
 		return {

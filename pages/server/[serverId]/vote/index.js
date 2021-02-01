@@ -21,7 +21,7 @@ const serverVoteIndex = ({ token, server }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
 		await checkServerSideCookie(context);
-		const token = context.store.getState().token;
+		const token = context.store.getState().authReducer.token;
 
 		const { serverId } = context.query;
 
