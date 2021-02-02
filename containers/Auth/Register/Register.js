@@ -66,7 +66,7 @@ class Register extends Component {
 				attributes: {
 					label: (
 						<p>
-							I do agree to the <a href="">Terms of Service</a>
+							I do agree to the <a href="/tos" target="_blank">Terms of Service</a>
 						</p>
 					),
 					id: "tosAgreement",
@@ -117,7 +117,6 @@ class Register extends Component {
 					}
 
 					if (response.data.code === 400) {
-						console.log(response);
 						this.setState({ errors: response.data.errors });
 					}
 
