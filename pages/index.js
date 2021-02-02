@@ -27,7 +27,7 @@ export default function Home(props) {
 				url="/servers/sponsored"
 				noDataMsg={(
 					<div className="col-md-12">
-						<p className="mx-auto">There are currently no sponsored servers, <a href="#">click here</a> to be the first.</p>
+						<p className="mx-auto"><strong>There are currently no sponsored servers, <a href="#">click here</a> to be the first.</strong></p>
 					</div>
 				)}
 				page={1}
@@ -48,6 +48,11 @@ export default function Home(props) {
 			<PagedTable
 				title="Server List"
 				url="/servers"
+				noDataMsg={(
+					<div className="col-md-12">
+						<p className="mx-auto text-bold"><strong>There are currently no servers to list.</strong></p>
+					</div>
+				)}
 				page={1}
 				pageSize={15}
 				maxButtonsCount={6}

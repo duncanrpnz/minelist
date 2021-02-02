@@ -26,7 +26,8 @@ class NavigationBar extends Component {
 			>
 				<div className="container mx-auto h-100 d-flex">
 					<div className="d-flex align-items-center">
-						<h3 className="mb-0">MineList</h3>
+						<img src="./assets/grass.png" width="36" className="mr-2"/>
+						<img src="./assets/logo.png" width="200" height="32" />
 					</div>
 
 					<nav className="ml-4">
