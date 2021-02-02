@@ -14,6 +14,8 @@ function MyApp({ Component, pageProps }) {
 					name="viewport"
 					content="initial-scale=1.0, width=device-width"
 				/>
+				<meta name="description" content="Find the best Minecraft servers with our multiplayer server list. Browse detailed information on each server and vote for your favourite."/>
+                <meta name="keywords" content="minecraft, minecraft servers, minecraft server list"/>
 			</Head>
 			<Component {...pageProps} />
 		</React.Fragment>
