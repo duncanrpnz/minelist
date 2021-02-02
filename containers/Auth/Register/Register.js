@@ -113,7 +113,7 @@ class Register extends Component {
 				.post("/auth/register", data)
 				.then((response) => {
 					if (response.data.code === 201) {
-						this.props.router.replace("/auth/login");
+						this.props.router.replace("/login");
 					}
 
 					if (response.data.code === 400) {

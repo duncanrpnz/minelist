@@ -19,7 +19,6 @@ import LoadingIndicator from "../../../components/UI/LoadingIndicator/LoadingInd
 import MessageBox from "../../../components/UI/MessageBox/MessageBox";
 
 const Login = ({ authenticate, token, loggingIn, error }) => {
-	console.log("Logging in state = " + loggingIn);
 
 	const [formValid, setFormValid] = useState(false);
 
@@ -100,7 +99,6 @@ const Login = ({ authenticate, token, loggingIn, error }) => {
 			formValid = valid && formValid;
 		});
 
-		console.log(formValid);
 
 		setFormValid(formValid);
 	};
@@ -149,16 +147,15 @@ const Login = ({ authenticate, token, loggingIn, error }) => {
 
 export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
-		checkServerSideCookie(context);
+		await checkServerSideCookie(context);
 
 		const currentState = context.store.getState();
 
-	
-		console.log(currentState);
 
 		const token = currentState.authReducer.token;
-		const error = currentState.error;
+		const error = currentState.authReucer.error;
 
+		
 		return {
 			props: {
 				token,

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "next/router";
 import { connect } from "react-redux";
 
+import { useRouter } from "next/router"
 import classes from "./ServerAdd.module.css";
 import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button/Button";
@@ -13,6 +14,8 @@ import LoadingIndicator from "../../../components/UI/LoadingIndicator/LoadingInd
 const serverAdd = (props) => {
 	const formRef = useRef(null);
 
+	const router = useRouter();
+
 	const [formValid, setFormValid] = useState(false);
 
 	const [formFileData, setFormFileData] = useState(null);
@@ -21,10 +24,19 @@ const serverAdd = (props) => {
 
 	const [errors, setErrors] = useState(null);
 
-	useEffect(() => {
+	useEffect(async () =>  {
 		//Update mode
 		if (props.id) {
 			setLoading(true);
+
+
+
+			const canEdit = await axios.post(`/servers/${props.id}/editable`).then(result => true).catch(err => false);
+
+			if(!canEdit) {
+				router.replace('/login');
+				return;
+			}
 
 			//Lookup existing stuffs
 			axios.get(`/servers/${props.id}`).then((result) => {

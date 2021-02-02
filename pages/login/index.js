@@ -23,13 +23,16 @@ const login = (props) => (
 
 export const getServerSideProps = wrapper.getServerSideProps(
 	async (context) => {
-		checkServerSideCookie(context);
+		await checkServerSideCookie(context);
 
-		console.log(context.store.getState());
-
+		
 		const token = context.store.getState().authReducer.token;
 
-	
+		if (token) {
+			context.res.writeHead(302, { Location: "/" });
+			context.res.end();
+		}
+
 		return {
 			props: {
 				token,
