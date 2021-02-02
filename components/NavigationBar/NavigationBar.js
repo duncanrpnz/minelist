@@ -15,6 +15,7 @@ import { deauthenticate } from "../../redux/actions/auth";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faSignOutAlt, faSignInAlt, faEdit, faPlus, faHome, faStar } from "@fortawesome/free-solid-svg-icons";
 
+import Image from "next/image";
 
 class NavigationBar extends Component {
 	render() {
@@ -26,8 +27,10 @@ class NavigationBar extends Component {
 			>
 				<div className="container mx-auto h-100 d-flex">
 					<div className="d-flex align-items-center">
-						<img src="./assets/grass.png" width="36" className="mr-2"/>
-						<img src="./assets/logo.png" width="200" height="32" />
+
+						
+						<Image src="/assets/grass.png" width={36} height={36} />
+						<Image src="/assets/logo.png" width={200} height={32} />
 					</div>
 
 					<nav className="ml-4">
