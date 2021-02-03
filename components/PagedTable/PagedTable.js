@@ -15,14 +15,16 @@ class PagedTable extends Component {
 		data: null,
 		error: null,
 		totalPages: 1,
+		url: null,
 	};
 
 	componentDidMount() {
 		this.loadPage();
+
+		console.log(this.props.url);
 	}
 
 	loadPage = (page) => {
-
 		if (!page) {
 			page = this.state.currentPage;
 		}
@@ -36,24 +38,22 @@ class PagedTable extends Component {
 			method: "GET",
 		})
 			.then((result) => {
-
+				console.log("Table result = ", result);
 				this.setState({
 					loading: false,
 					data: result.data.data,
 					currentPage: page,
 					totalPages: parseInt(
-						result.data.total / this.props.pageSize
+						Math.ceil(result.data.total / this.props.pageSize)
 					),
 				});
 			})
 			.catch((error) => {
-
 				this.setState({ loading: false, error: error });
 			});
 	};
 
 	setPageHandler = (page) => {
-
 		this.loadPage(page);
 	};
 
@@ -78,7 +78,9 @@ class PagedTable extends Component {
 					<tr>
 						<td colSpan="100%">
 							<div className="pt-5 text-center">
-								{this.props.noDataMsg ?? <h5>No data to display</h5>}
+								{this.props.noDataMsg ?? (
+									<h5>No data to display</h5>
+								)}
 							</div>
 						</td>
 					</tr>
@@ -92,52 +94,73 @@ class PagedTable extends Component {
 		let pageButtonClasses = [classes.Button];
 
 		if (this.state.totalPages > 1) {
-			if (
-				this.state.currentPage >= this.props.maxButtonsCount - 2 &&
-				this.state.totalPages > this.props.maxButtonsCount
-			) {
-				displayArrowsLeft = true;
+			if (this.state.totalPages >= this.props.maxButtonsCount) {
+				if (
+					this.state.currentPage >= this.props.maxButtonsCount - 2 &&
+					this.state.totalPages > this.props.maxButtonsCount
+				) {
+					displayArrowsLeft = true;
 
-				let start = parseInt(
-					this.state.currentPage - this.props.maxButtonsCount / 2
-				);
+					let start = parseInt(
+						this.state.currentPage - this.props.maxButtonsCount / 2
+					);
 
-				let end = parseInt(
-					this.state.currentPage + this.props.maxButtonsCount / 2
-				);
+					let end = parseInt(
+						this.state.currentPage + this.props.maxButtonsCount / 2
+					);
 
-				if (end > this.state.totalPages) {
-					end = start + (this.state.totalPages - start) + 1;
-					start -= this.props.maxButtonsCount - (end - start);
-					if (start < 1) {
-						start = 1;
+					if (end > this.state.totalPages) {
+						end = start + (this.state.totalPages - start) + 1;
+						start -= this.props.maxButtonsCount - (end - start);
+						if (start < 1) {
+							start = 1;
+						}
+
+						displayArrowsRight = false;
 					}
 
-					displayArrowsRight = false;
-				}
+					for (let i = start; i <= end; i++) {
+						i === this.state.currentPage
+							? (pageButtonClasses = [
+									classes.PageButton,
+									classes.activePage,
+							  ])
+							: (pageButtonClasses = [classes.PageButton]);
 
-				for (let i = start; i <= end; i++) {
-					i === this.state.currentPage
-						? (pageButtonClasses = [
-								classes.PageButton,
-								classes.activePage,
-						  ])
-						: (pageButtonClasses = [classes.PageButton]);
+						paginationButtons.push(
+							<button
+								className={pageButtonClasses.join(" ")}
+								key={i}
+								onClick={() => this.setPageHandler(i)}
+							>
+								{i}
+							</button>
+						);
+					}
+				} else {
+					displayArrowsLeft = false;
 
-					paginationButtons.push(
-						<button
-							className={pageButtonClasses.join(" ")}
-							key={i}
-							onClick={() => this.setPageHandler(i)}
-						>
-							{i}
-						</button>
-					);
+					for (let i = 1; i <= this.props.maxButtonsCount; i++) {
+						i === this.state.currentPage
+							? (pageButtonClasses = [
+									classes.PageButton,
+									classes.activePage,
+							  ])
+							: (pageButtonClasses = [classes.PageButton]);
+
+						paginationButtons.push(
+							<button
+								key={i}
+								className={pageButtonClasses.join(" ")}
+								onClick={() => this.setPageHandler(i)}
+							>
+								{i}
+							</button>
+						);
+					}
 				}
 			} else {
-				displayArrowsLeft = false;
-
-				for (let i = 1; i <= this.props.maxButtonsCount; i++) {
+				for (let i = 1; i <= this.state.totalPages; i++) {
 					i === this.state.currentPage
 						? (pageButtonClasses = [
 								classes.PageButton,
@@ -155,6 +178,9 @@ class PagedTable extends Component {
 						</button>
 					);
 				}
+
+				displayArrowsRight = false;
+				displayArrowsLeft = false;
 			}
 		} else {
 			displayArrowsRight = false;
@@ -189,7 +215,7 @@ class PagedTable extends Component {
 			<button
 				key="toEnd"
 				className={classes.PageButton}
-				onClick={() => this.setPageHandler(this.state.totalPages + 1)}
+				onClick={() => this.setPageHandler(this.state.totalPages)}
 			>
 				{">>"}
 			</button>,
@@ -205,9 +231,7 @@ class PagedTable extends Component {
 
 		return (
 			<div key={this.props.key}>
-				<h3 className="mb-4">
-					{this.props.title}
-				</h3>
+				<h3 className="mb-4">{this.props.title}</h3>
 
 				<Table
 					key={new Date().getTime()}
@@ -226,7 +250,13 @@ class PagedTable extends Component {
 					<tbody>{tableContent}</tbody>
 				</Table>
 
-				<div className="row">{paginationButtons}</div>
+				<div className="container">
+					<div className="row">
+						<div className="col-md-6 offset-md-3 text-center">
+							{paginationButtons}
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}

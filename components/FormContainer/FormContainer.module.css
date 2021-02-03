@@ -1,0 +1,22 @@
+.FormContainer {
+
+
+}
+
+.FormContainerTitle {
+    width: 100%;
+    padding: 10px;
+    background-color: #34495e;
+    color: #FFF;
+    box-sizing: border-box;
+
+    font-size: 20px;
+}
+
+.FormContainerBody {
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid;
+    background-color: #FFF;
+    height: auto;
+}

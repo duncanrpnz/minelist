@@ -4,7 +4,7 @@ import FileUpload from "../FileUpload/FileUpload";
 
 const input = (props) => {
 
-	let inputClasses = [classes.Input];
+	let inputClasses = [classes.Input].concat(props.className);
 
 	if (!props.valid && props.touched) {
 		inputClasses.push(classes.Invalid);
@@ -23,7 +23,7 @@ const input = (props) => {
 	);
 
 	if (props.attributes.type === "select") {
-		console.log("redrawing select, " + props.attributes.value);
+
 		input = (
 			<select
 				className={inputClasses.join(" ")}

@@ -2,11 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "next/router";
 import { connect } from "react-redux";
 
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
 import classes from "./ServerAdd.module.css";
 import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button/Button";
-import { faPlusSquare, faSearch, faSave } from "@fortawesome/free-solid-svg-icons";
+import {
+	faPlusSquare,
+	faSearch,
+	faSave,
+} from "@fortawesome/free-solid-svg-icons";
 import Countries from "../../../shared/countries";
 import axios from "../../../axios";
 import LoadingIndicator from "../../../components/UI/LoadingIndicator/LoadingIndicator";
@@ -24,17 +28,18 @@ const serverAdd = (props) => {
 
 	const [errors, setErrors] = useState(null);
 
-	useEffect(async () =>  {
+	useEffect(async () => {
 		//Update mode
 		if (props.id) {
 			setLoading(true);
 
+			const canEdit = await axios
+				.post(`/servers/${props.id}/editable`)
+				.then((result) => true)
+				.catch((err) => false);
 
-
-			const canEdit = await axios.post(`/servers/${props.id}/editable`).then(result => true).catch(err => false);
-
-			if(!canEdit) {
-				router.replace('/login');
+			if (!canEdit) {
+				router.replace("/login");
 				return;
 			}
 
@@ -116,6 +121,43 @@ const serverAdd = (props) => {
 				touched: false,
 				validation: (value) => value.length > 100,
 			},
+			votifier_ip: {
+				attributes: {
+					label: "Votifier Host",
+					id: "votifier_ip",
+					name: "votifier_ip",
+					value: "",
+					type: "text",
+					placeholder: "(optional)",
+				},
+				valid: false,
+				touched: false,
+			},
+			votifier_port: {
+				attributes: {
+					label: "Votifier Port",
+					id: "votifier_port",
+					name: "votifier_port",
+					value: "",
+					type: "port",
+					placeholder: "(optional)",
+				},
+				valid: false,
+				touched: false,
+			},
+			votifier_key: {
+				attributes: {
+					label: "Votifier Public Key",
+					id: "votifier_key",
+					name: "votifier_key",
+					value: "",
+					type: "textarea",
+					placeholder: "(optional)",
+				},
+				valid: false,
+				touched: false,
+			},
+			
 			social_website: {
 				attributes: {
 					label: "Website",
@@ -190,7 +232,7 @@ const serverAdd = (props) => {
 		control.attributes.value = elementVal;
 
 		if (control.validation) {
-			control.valid = (elementVal ? control.validation(elementVal) : false);
+			control.valid = elementVal ? control.validation(elementVal) : false;
 		}
 
 		checkIsFormValid();
@@ -279,71 +321,76 @@ const serverAdd = (props) => {
 		}
 	};
 
-	let formClasses = [];
+	let form = <LoadingIndicator />;
 
-	if (loading) {
-		formClasses = ["d-none"];
+	if (!loading) {
+		form = (
+			<div className={classes.ServerAdd}>
+				<h3 className="mr-0 ml-0">{!props.id ? "Add server" : "Update your server"}</h3>
+
+				<div className="p-3">
+					<p>
+						{!props.id
+							? "Please fill in all required details in order to post your server."
+							: "Please fill in all required details in order to update your server."}
+					</p>
+
+					{errors && <p className="red">{errors.join("<br/>")}</p>}
+					{Object.keys(state.controls).map((controlKey) => {
+						const control = state.controls[controlKey];
+
+						let controlChangedEvent = (event) =>
+							formInputChangedHandler(event);
+
+						if (control.attributes.type === "fileUpload") {
+							controlChangedEvent = (fileData) =>
+								formFileSetHandler(fileData);
+						}
+
+						return (
+							<Input
+								attributes={control.attributes}
+								key={controlKey}
+								valid={
+									control.validation ? control.valid : true
+								}
+								touched={control.touched}
+								options={control.options}
+								defaultOption={control.defaultOption}
+								changed={controlChangedEvent}
+							/>
+						);
+					})}
+
+					{!props.id ? (
+						<Button
+							icon={faPlusSquare}
+							disabled={!formValid}
+							clicked={addServerHandler}
+						>
+							ADD
+						</Button>
+					) : (
+						<Button
+							icon={faSave}
+							disabled={!formValid}
+							clicked={addServerHandler}
+						>
+							UPDATE
+						</Button>
+					)}
+				</div>
+			</div>
+		);
 	}
 
 	return (
 		<form
-			className={classes.ServerAdd}
+			className="col-md-6 offset-md-3 pr-0 pl-0"
 			ref={formRef}
 			encType="multipart/form-data"
 		>
-			{loading && <LoadingIndicator />}
-
-			<div className={formClasses.join(" ")}>
-				<h2>{!props.id ? "Add your server" : "Update your server"}</h2>
-				
-				<p>
-					{!props.id ? "Please fill in all required details in order to post your server."
-					: "Please fill in all required details in order to update your server."}
-				</p>
-
-				{errors && <p className="red">{errors.join("<br/>")}</p>}
-				{Object.keys(state.controls).map((controlKey) => {
-					const control = state.controls[controlKey];
-
-					let controlChangedEvent = (event) =>
-						formInputChangedHandler(event);
-
-					if (control.attributes.type === "fileUpload") {
-						controlChangedEvent = (fileData) =>
-							formFileSetHandler(fileData);
-					}
-
-					return (
-						<Input
-							attributes={control.attributes}
-							key={controlKey}
-							valid={control.validation ? control.valid : true}
-							touched={control.touched}
-							options={control.options}
-							defaultOption={control.defaultOption}
-							changed={controlChangedEvent}
-						/>
-					);
-				})}
-
-				{!props.id ? (
-					<Button
-						icon={faPlusSquare}
-						disabled={!formValid}
-						clicked={addServerHandler}
-					>
-						ADD
-					</Button>
-				) : (
-					<Button
-						icon={faSave}
-						disabled={!formValid}
-						clicked={addServerHandler}
-					>
-						UPDATE
-					</Button>
-				)}
-			</div>
+			{form}
 		</form>
 	);
 };
