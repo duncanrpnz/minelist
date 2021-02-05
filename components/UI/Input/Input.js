@@ -31,10 +31,11 @@ const input = (props) => {
 				value={props.attributes.value}
 				onChange={props.changed}
 			>
-				<option value={props.defaultOption}>{props.defaultOption}</option>
+				{props.defaultOption && <option value={props.defaultOption}>{props.defaultOption}</option>}
+				
 				{props.options.map((option, i) => {
-					let text = option;
-					let value = option;
+					let text = option.text;
+					let value = option.value ?? option.text;
 
 					if (typeof option == "object") {
 						text = option.text;

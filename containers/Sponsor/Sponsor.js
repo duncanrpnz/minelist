@@ -14,8 +14,13 @@ import PagedTable from "../../components/PagedTable/PagedTable";
 
 const sponsor = (props) => {
 	const [auctionInfo, setAuctionInfo] = useState(null);
+	const [myServers, setMyServers] = useState(null);
+    const [bid, setBid] = useState({
+        server: null,
+        amount: 0.0
+    });
 
-    const bidTableRef = useRef(null);
+	const bidTableRef = useRef(null);
 
 	useEffect(() => {
 		axios.get("/auction/latest").then((result) => {
@@ -23,14 +28,64 @@ const sponsor = (props) => {
 				setAuctionInfo(result.data);
 			}
 		});
+
+		axios.get("/servers/myservers").then((result) => {
+			if (result.status === 200) {
+                setMyServers(result.data.data);
+
+			}
+		});
 	}, []);
 
-    useEffect(() => {
+	useEffect(() => {
+		if (auctionInfo) {
+			bidTableRef.current.loadPage();
+		}
+    }, [auctionInfo]);
 
-        if(auctionInfo) {
-            bidTableRef.current.loadPage();
+    useEffect(() => {
+        if(myServers && myServers.length > 0) {
+            setBid({...bid, server: myServers[0].id})
         }
-    }, [auctionInfo])
+    }, [myServers]);
+    
+    const bidServerSelectHandler = (e) => {
+        setBid({...bid, server: e.target.value});
+    };
+
+    const bidAmountChangeHandler = (e) => {
+        setBid({...bid, amount: e.target.value});
+    };
+
+    const bidPlaceClickHandler = (e) => {
+
+        const server = bid.server;
+        const amount = bid.amount;
+
+        const data = {
+            serverId: server,
+            amount: amount
+        };
+
+        console.log(auctionInfo);
+
+        axios.post(`/auction/${auctionInfo['Auction ID']}/bids`, data).then(result => {
+            bidTableRef.current.loadPage();
+        });
+    };
+
+	let serverOptions = [];
+    let defaultOption = "Loading...";
+
+	if (myServers) {
+        defaultOption = myServers[0].name;
+
+		serverOptions = myServers.map((server) => {
+			return { text: server.name, value: server.id };
+		});
+    }
+  
+
 
 	return (
 		<React.Fragment>
@@ -55,28 +110,38 @@ const sponsor = (props) => {
 				</p>
 			</FormContainer>
 
+            
 			<div className="container-fluid mt-3">
 				<div className="row justify-content-around d-flex">
 					<FormContainer title="Auction" className={["col-md-6"]}>
 						<div className="mt-2 container-fluid">
 							<div className="row">
 								<Input
-                                    className="mb-0"
+									attributes={{ type: "select" }}
+                                    options={serverOptions}
+                                    changed={bidServerSelectHandler}
+								/>
+							</div>
+							<div className="row">
+								<Input
+									className="mb-0"
 									attributes={{
 										type: "text",
-                                        placeholder: "Enter your bid"
-									}}
+                                        placeholder: "Enter your bid",
+                                        value: bid.amount
+                                    }}
+                                    changed={bidAmountChangeHandler}
 								/>
 
-								<Button>Place Bid</Button>
+								<Button clicked={bidPlaceClickHandler}>Place Bid</Button>
 							</div>
 						</div>
-                        
 
-                
 						<PagedTable
-                            ref={bidTableRef}
-							url={`/auction/${auctionInfo ? auctionInfo['Auction ID'] : 0}/bids`}
+							ref={bidTableRef}
+							url={`/auction/${
+								auctionInfo ? auctionInfo["Auction ID"] : 0
+							}/bids`}
 							noDataMsg={
 								<div className="col-md-12">
 									<p className="mx-auto">
@@ -93,9 +158,9 @@ const sponsor = (props) => {
 							itemRenderer={(dataItem) => {
 								return (
 									<tr key={dataItem.id}>
-                                        <td>{dataItem.name}</td>
-                                        <td>${dataItem.amount.toFixed(2)}</td>
-                                    </tr>
+										<td>{dataItem.name}</td>
+										<td>${dataItem.amount.toFixed(2)}</td>
+									</tr>
 								);
 							}}
 						/>

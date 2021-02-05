@@ -74,7 +74,7 @@ class Register extends Component {
 					checked: false,
 					type: "select",
 				},
-				options: ["Yes", "No"],
+				options: [{text: "Yes", value: "Yes"}, {text: "No", value: "No"}],
 				defaultOption: "Please select an answer",
 				valid: false,
 				touched: false,

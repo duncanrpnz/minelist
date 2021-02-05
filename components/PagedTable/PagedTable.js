@@ -20,9 +20,8 @@ class PagedTable extends Component {
 
 	componentDidMount() {
 		this.loadPage();
-
-		console.log(this.props.url);
 	}
+
 
 	loadPage = (page) => {
 		if (!page) {
