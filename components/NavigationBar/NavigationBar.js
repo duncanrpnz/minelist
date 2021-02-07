@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import { deauthenticate } from "../../redux/actions/auth";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faSignOutAlt, faSignInAlt, faEdit, faPlus, faHome, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faSignOutAlt, faSignInAlt, faEdit, faPlus, faHome, faStar, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import Image from "next/image";
 
@@ -37,6 +37,9 @@ class NavigationBar extends Component {
 						<NavigationItems>
 							<NavigationItem icon={faHome} click={() => router.push("/")}>
 								Home
+							</NavigationItem>
+							<NavigationItem icon={faEnvelope} click={() => router.push("/contact")}>
+								Contact
 							</NavigationItem>
 							{/* <NavigationItem icon={faStar} click={() => router.push("/sponsor")}>
 								Go Sponsored
