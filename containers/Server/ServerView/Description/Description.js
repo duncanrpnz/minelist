@@ -3,8 +3,7 @@ import Button from "../../../../components/UI/Button/Button";
 
 export const description = (props) => {
 
-	console.log(props.voteClicked);
-	
+
 	return (
 		<div className="container h-100 d-flex flex-column">
 			<div className="row pt-4 mb-3">

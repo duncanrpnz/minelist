@@ -14,7 +14,6 @@ import Button from "../../UI/Button/Button";
 
 class Server extends Component {
 	render() {
-		console.log(this.props.online);
 
 		let rank = this.props.rank;
 
@@ -47,6 +46,8 @@ class Server extends Component {
 					<FontAwesomeIcon className={classes.ServerAction} icon={faEdit} size="1x" onClick={this.props.editClicked} />
 
 					<FontAwesomeIcon className={classes.ServerAction} icon={faTrash} size="1x" onClick={this.props.deleteClicked}/>
+
+					{this.props.auctionId ? <Button className="w-auto h-auto">Pay</Button> : null}
 				</td>
 			</tr>
 		);

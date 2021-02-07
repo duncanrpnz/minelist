@@ -19,9 +19,19 @@ class PagedTable extends Component {
 	};
 
 	componentDidMount() {
-		this.loadPage();
-	}
+		if (this.props.data) {
 
+			this.setState({
+				loading: false,
+				data: [{...this.props.data}],
+				currentPage: 1,
+				totalPages: 1,
+			});
+
+		} else {
+			this.loadPage();
+		}
+	}
 
 	loadPage = (page) => {
 		if (!page) {
@@ -53,6 +63,11 @@ class PagedTable extends Component {
 	};
 
 	setPageHandler = (page) => {
+
+		if(page > this.state.totalPages) {
+			return;
+		}
+
 		this.loadPage(page);
 	};
 
@@ -76,7 +91,7 @@ class PagedTable extends Component {
 				tableContent = (
 					<tr>
 						<td colSpan="100%">
-							<div className="pt-5 text-center">
+							<div className="text-center">
 								{this.props.noDataMsg ?? (
 									<h5>No data to display</h5>
 								)}
@@ -230,7 +245,9 @@ class PagedTable extends Component {
 
 		return (
 			<div key={this.props.key}>
-				<h3 className="mb-4">{this.props.title}</h3>
+				{this.props.title && (
+					<h3 className="mb-4">{this.props.title}</h3>
+				)}
 
 				<Table
 					key={new Date().getTime()}
@@ -249,7 +266,7 @@ class PagedTable extends Component {
 					<tbody>{tableContent}</tbody>
 				</Table>
 
-				<div className="container">
+				<div className="container mt-5">
 					<div className="row">
 						<div className="col-md-6 offset-md-3 text-center">
 							{paginationButtons}

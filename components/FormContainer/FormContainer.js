@@ -32,7 +32,7 @@ const formContainer = (props) => {
 					{props.title}
 				</div>
 
-				<div className={classes.FormContainerBody}>
+				<div className={classes.FormContainerBody} style={{padding: props.padding}}>
 					{props.children}
 				</div>
 			</div>

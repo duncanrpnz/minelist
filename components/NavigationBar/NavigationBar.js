@@ -38,9 +38,9 @@ class NavigationBar extends Component {
 							<NavigationItem icon={faHome} click={() => router.push("/")}>
 								Home
 							</NavigationItem>
-							<NavigationItem icon={faStar} click={() => router.push("/sponsor")}>
+							{/* <NavigationItem icon={faStar} click={() => router.push("/sponsor")}>
 								Go Sponsored
-							</NavigationItem>
+							</NavigationItem>  */}
 						</NavigationItems>
 					</nav>
 

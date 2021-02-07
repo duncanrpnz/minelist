@@ -26,8 +26,8 @@ export default function Home(props) {
 				title="Sponsored Servers"
 				url="/servers/sponsored"
 				noDataMsg={(
-					<div className="col-md-12">
-						<p className="mx-auto"><strong>There are currently no sponsored servers, <a href="#">click here</a> to be the first.</strong></p>
+					<div className="col-md-12 mt-5">
+						<p className="mx-auto"><strong>There are currently no sponsored servers, <a href="/contact?subject=Server Sponsorship">click here</a> to enquire.</strong></p>
 					</div>
 				)}
 				page={1}
@@ -49,12 +49,12 @@ export default function Home(props) {
 				title="Server List"
 				url="/servers"
 				noDataMsg={(
-					<div className="col-md-12">
+					<div className="col-md-12 mt-5">
 						<p className="mx-auto text-bold"><strong>There are currently no servers to list.</strong></p>
 					</div>
 				)}
 				page={1}
-				pageSize={15}
+				pageSize={10}
 				maxButtonsCount={6}
 				columns={["Rank", "Name", "Server", "Players", "Status"]}
 				itemRenderer={(dataItem) => {

@@ -1,5 +1,11 @@
 .PagedTable {
     box-sizing: border-box;
+    margin-bottom: 0px;
+}
+
+
+.PagedTable tr {
+    padding: 5px;
 }
 
 .PagedTable thead {
@@ -11,20 +17,24 @@
 .PagedTable thead th {
     padding: 10px 10px;
     box-sizing: border-box;
+    border-top: 0px;
 }
 
 .PagedTable tbody td {
     border: 0;
     box-sizing: border-box;
+    
 }
 .PageButton {
-    padding: 2px 7px;
+    padding: 4px 10px;
     box-sizing: border-box;
     margin-right: 2px;
     text-align: center;
+    border: 1px solid rgb(124, 124, 124);
 }
 
 .activePage {
-    background: black;
+    background: #34495e;
     color: white;
+    border: 1px solid #000;
 }

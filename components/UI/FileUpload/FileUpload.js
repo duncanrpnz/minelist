@@ -20,7 +20,7 @@ const fileUpload = (props) => {
 
 	useEffect(() => {
 		if (props.value) {
-			console.log("Setting fileupload image");
+
 			setImage64(props.value);
 			props.changed(props.value);
 		}

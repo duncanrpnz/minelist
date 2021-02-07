@@ -2,7 +2,7 @@ import React from 'react';
 
 const xAxisDayOfWeek = (props) => {
     const {x, y, payload} = this.props;
-    console.log("Tick: ", props);
+
     
     return (
         <g transform={`translate(${x},${y})`}>

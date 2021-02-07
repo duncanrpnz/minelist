@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+  <url>
+    <loc>https://mine-list.com/</loc>
+    <lastmod>2021-02-07T02:50:35.724Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/contact</loc>
+    <lastmod>2021-02-07T02:50:35.724Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/login</loc>
+    <lastmod>2021-02-07T02:50:35.724Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/privacy</loc>
+    <lastmod>2021-02-07T02:50:35.724Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/register</loc>
+    <lastmod>2021-02-07T02:50:35.724Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/tos</loc>
+    <lastmod>2021-02-07T02:50:35.724Z</lastmod>
+  </url>
+
+</urlset>
