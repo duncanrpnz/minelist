@@ -4,7 +4,7 @@ const prettier = require("prettier");
 
 const getDate = new Date().toISOString();
 
-const YOUR_AWESOME_DOMAIN = "https://website.com";
+const YOUR_AWESOME_DOMAIN = "https://mine-list.com";
 
 const formatted = sitemap => prettier.format(sitemap, { parser: "html" });
 
