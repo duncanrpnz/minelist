@@ -38,3 +38,10 @@
     color: white;
     border: 1px solid #000;
 }
+
+@media (max-width: 640px) {
+    .PagedTable thead {
+        display: none;
+    }
+    
+}

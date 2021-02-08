@@ -243,6 +243,8 @@ class PagedTable extends Component {
 			paginationButtons = [...paginationButtons, ...rightButtons];
 		}
 
+	
+
 		return (
 			<div key={this.props.key}>
 				{this.props.title && (
@@ -257,9 +259,12 @@ class PagedTable extends Component {
 				>
 					<thead>
 						<tr>
-							{this.props.columns.map((column) => (
+
+							{this.props.columns && this.props.columns.map((column) => (
 								<th key={column}>{column}</th>
 							))}
+
+							{this.props.columnsRenderer && this.props.columnsRenderer()}
 						</tr>
 					</thead>
 

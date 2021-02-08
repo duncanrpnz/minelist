@@ -9,7 +9,6 @@ import Head from "next/head";
 import Server from "../containers/ServerList/Server/Server";
 import PagedTable from "../components/PagedTable/PagedTable";
 import Layout from "../hoc/Layout/Layout";
-
 import store from "../redux";
 
 export default function Home(props) {
@@ -33,7 +32,16 @@ export default function Home(props) {
 				page={1}
 				pageSize={5}
 				maxButtonsCount={6}
-				columns={["Rank", "Name", "Server", "Players", "Status"]}
+				columnsRenderer={() => {
+					// ["Rank", "Name", "Server", "Players", "Status"]
+					return <React.Fragment>
+						<th>Rank</th>
+						<th className="d-sm-none">Name</th>
+						<th>Server</th>
+						<th>Players</th>
+						<th>Status</th>
+					</React.Fragment>
+				}}
 				itemRenderer={(dataItem) => {
 					return (
 						<Server
@@ -56,7 +64,16 @@ export default function Home(props) {
 				page={1}
 				pageSize={10}
 				maxButtonsCount={6}
-				columns={["Rank", "Name", "Server", "Players", "Status"]}
+				columnsRenderer={() => {
+					// ["Rank", "Name", "Server", "Players", "Status"]
+					return <React.Fragment>
+						<th>Rank</th>
+						<th className="d-md-table-cell d-sm-none">Name</th>
+						<th>Server</th>
+						<th>Players</th>
+						<th>Status</th>
+					</React.Fragment>
+				}}
 				itemRenderer={(dataItem) => {
 					return (
 						<Server

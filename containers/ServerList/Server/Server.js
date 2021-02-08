@@ -34,13 +34,13 @@ class Server extends Component {
 				className={[classes.Server].join(" ")}
 				
 			>
-				<td className="text-center" width="8%">
+				<td className={["text-center", classes.Rank].join(' ')}>
 					<span className={rankClasses.join(' ')}>{rank}</span>
 				</td>
-				<td className={[classes.name, "text-left"].join(" ")} width="18%">
-					<strong onClick={() => this.props.clicked(this.props.id)}>{this.props.name}</strong>
+				<td className={[classes.Name, "text-left", "col-name"].join(" ")}>
+					<span className="font-weight-bold" onClick={() => this.props.clicked(this.props.id)}>{this.props.name}</span>
 				</td>
-				<td width="468px">
+				<td className={classes.Banner}>
 					<div className="row text-center">
 						<img
 							className={classes.banner}
@@ -53,10 +53,10 @@ class Server extends Component {
 						{this.props.ip}
 					</div>
 				</td>
-				<td className="" width="5%">
+				<td className={classes.Players}>
 					{this.props.players_online}/{this.props.max_players ?? 20}
 				</td>
-				<td className="text-center" width="15%">
+				<td className={["text-center", classes.Status].join(' ')}>
 					<StatusIndicator online={this.props.online} />
 				</td>
 			</tr>

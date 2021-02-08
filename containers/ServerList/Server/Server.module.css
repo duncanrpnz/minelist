@@ -16,15 +16,13 @@
     vertical-align: middle;
 }
 
-.Server > td > img {
-    width: 100%;
-}
+
 
 .Server .name {
     cursor: pointer;
 }
 
-.Server .banner {
+.Banner img {
     background: lightgray;
     width: 468px;
     height: 60px;
@@ -32,7 +30,7 @@
     cursor: pointer;
 }
 
-.Server .banner:hover {
+.Banner img:hover {
     cursor: pointer;
 }
 
@@ -45,7 +43,7 @@
     cursor: text;
 }
 
-.Rank {
+.Rank > span {
     background-color: #bdc3c7;
     color: rgb(92, 92, 92);
     border-radius: 4px;
@@ -56,4 +54,78 @@
 .Sponsored {
     background-color: rgb(238, 181, 36);
     color: #FFF;
+}
+
+
+@media (max-width: 640px) {
+
+    .Server {
+        position: relative;
+        display: block;
+        margin-bottom: 40px;
+        position: relative;
+        background-color: #fff;
+        max-width: 468px;
+        margin: 0 auto 30px;
+        padding: 0;
+        border-radius: 4px;
+        overflow: hidden;
+        height: fit-content !important;
+    }   
+
+    .Rank {
+        width: 40px !important;
+        height: 40px !important;
+        position: relative;
+        display: inline-block;
+     
+        padding: 0px !important;
+    }
+
+    .Rank span {
+        padding-top: 7px !important;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+
+    .Name {
+        width: 328px !important;
+        position: relative;
+
+        
+        height: 40px !important;
+        display: inline-block;
+        text-align: center;
+
+    }
+
+    .Name span {
+        width: fit-content;
+        position: relative;
+        display: block;
+        margin: 0px auto;
+       
+    }
+
+    .Banner {
+        width: 100%;
+    }
+
+    .ServerIp {
+
+    }
+
+    .Players {
+
+    }
+
+    .Status {
+        position: absolute;
+        top: 5px;
+        right: 30px;
+        width: 100px;
+        height: 40px;
+        align-items: center;
+        float: left;
+    }
 }
