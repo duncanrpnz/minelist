@@ -11,7 +11,7 @@
 
 .Server td {
     padding: 10px;
-    height: 100%;
+
 
     vertical-align: middle;
 }
@@ -57,7 +57,7 @@
 }
 
 
-@media (max-width: 640px) {
+@media (max-width: 960px) {
 
     .Server {
         position: relative;
@@ -65,20 +65,23 @@
         margin-bottom: 40px;
         position: relative;
         background-color: #fff;
-        max-width: 468px;
+        max-width: 100%;
         margin: 0 auto 30px;
         padding: 0;
         border-radius: 4px;
         overflow: hidden;
         height: fit-content !important;
+        padding: 0 !important;
     }   
+
 
     .Rank {
         width: 40px !important;
         height: 40px !important;
-        position: relative;
+        position: absolute;
         display: inline-block;
-     
+        top: calc(50% - 10px);
+        left: 17px;
         padding: 0px !important;
     }
 
@@ -89,10 +92,10 @@
     }
 
     .Name {
-        width: 328px !important;
+        width: 100% !important;
         position: relative;
-
-        
+        background-color: #34495e;
+        color: #FFF;
         height: 40px !important;
         display: inline-block;
         text-align: center;
@@ -108,24 +111,52 @@
     }
 
     .Banner {
-        width: 100%;
+        width: 100% !important;
+
+        display: block;
+        margin: 0px auto;
+    }
+
+    .Banner img {
+        max-width: 468px;
+        margin: 0px auto;
     }
 
     .ServerIp {
-
+        max-width: 468px;
+        margin: 0px auto;
     }
 
     .Players {
-
+        display: none;
     }
 
     .Status {
         position: absolute;
-        top: 5px;
-        right: 30px;
-        width: 100px;
-        height: 40px;
-        align-items: center;
-        float: left;
+        top: calc(50%);
+        right: 35px;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+}
+
+@media (max-width: 760px) {
+    .Banner img {
+        max-width: 368px;
+        margin: 0px auto;
+    }
+
+    .ServerIp {
+        max-width: 368px;
+        margin: 0px auto;
+    }
+
+    .Status {
+        right: 15px;
+    }
+
+    .Rank {
+        left: 8px;
     }
 }
