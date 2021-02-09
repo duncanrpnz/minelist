@@ -136,7 +136,7 @@ const Login = ({ authenticate, token, loggingIn, error }) => {
 
 	return (
 		<React.Fragment>
-			<form className={classes.Login} onSubmit={loginSubmitHandler}>
+			<form className={[classes.Login, "p-4", "col-md-6", "offset-md-3", "col-sm-12"].join(' ')} onSubmit={loginSubmitHandler}>
 				{error && <MessageBox>{error}</MessageBox>}
 
 				{loggingIn ? <LoadingIndicator /> : formContents}

@@ -179,7 +179,7 @@ class Register extends Component {
 	render() {
 		return (
 			<form
-				className={classes.Register}
+				className={[classes.Register, "p-4", "col-md-6", "offset-md-3", "col-sm-12"].join(' ')}
 				onSubmit={this.registerSubmitHandler}
 			>
 				{this.state.loading ? (
