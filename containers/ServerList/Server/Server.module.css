@@ -27,7 +27,8 @@
     background: lightgray;
     width: 468px;
     height: 60px;
-
+    display: block;
+    margin: 0px auto;
     cursor: pointer;
 }
 
@@ -41,6 +42,7 @@
     padding: 5px;
     box-sizing: border-box;
     width: 468px;
+    margin: 0px auto;
     cursor: text;
 }
 
@@ -147,12 +149,12 @@
 
 @media (max-width: 760px) {
     .Banner img {
-        max-width: 368px;
+        max-width: 100%;
         margin: 0px auto;
     }
 
     .ServerIp {
-        max-width: 368px;
+        max-width: 100%;
         margin: 0px auto;
     }
 

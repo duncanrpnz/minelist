@@ -1,6 +1,12 @@
 .PagedTable {
     box-sizing: border-box;
     margin-bottom: 0px;
+    width: 100% !important;
+    
+}
+
+.PagedTable table {
+    
 }
 
 
