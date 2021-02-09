@@ -10,12 +10,13 @@ import Description from "./Description/Description";
 import Stats from "./Stats/Stats";
 
 import MessageBox from "../../../components/UI/MessageBox/MessageBox";
+import FormContainer from "../../../components/FormContainer/FormContainer";
 
 import { connect } from "react-redux";
 import { JUST_VOTED_CLEAR } from "../../../redux/actionTypes";
 
 const serverView = (props) => {
-	const classesArr = ["container-fluid", classes.Toolbar];
+	const classesArr = [classes.Toolbar];
 	const rowClasses = ["row", classes.ServerPropertyRow];
 	const router = useRouter();
 
@@ -38,18 +39,18 @@ const serverView = (props) => {
 	}, []);
 
 	return (
-		<React.Fragment>
+		<div className="container">
 			{justVoted && (
 				<MessageBox type="Success">Thanks for voting!</MessageBox>
 			)}
 
-			<div className={classesArr.join(" ")}>
-				<div className="col-md-6 col-sm-6 d-flex align-items-center flex-grow flex-flow-row p-3">
-					<h3 className="mb-0">{props.name}</h3>
-				</div>
-
-				<div className="d-flex h-100 col-md-6 col-sm-6 col-xs-6  align-items-center flex-grow flex-flow-row">
-					<ul className={[classes.Tabs].join(' ')}>
+			<FormContainer
+				title={props.name}
+				className={["col-md-6"]}
+				padding="10px"
+			>
+				{/* <div className="d-flex h-100 col-md-12 col-sm-6 col-xs-6  align-items-center flex-grow flex-flow-row">
+					<ul className={[classes.Tabs].join(" ")}>
 						<li
 							className={classes.TabItem}
 							onClick={() =>
@@ -71,22 +72,24 @@ const serverView = (props) => {
 						>
 							Stats
 						</li>
-						{/* <li className={classes.TabItem}>Widget</li> */}
+						{/* <li className={classes.TabItem}>Widget</li> *
 					</ul>
-				</div>
-			</div>
+				</div> */}
 
-			<div className="container-fluid d-md-flex d-sm-block d-xs-block no-margin ml-0 mr-0 pl-0 pr-0">
-				{/* Tabs Content */}
 				<div className="col-md-8 col-sm-12 d-flex flex-column justify-content-between align-items-center mb-4 mb-sm-4 mb-xs-4 ">
 					{selectedTab}
 				</div>
+			</FormContainer>
 
+			<FormContainer
+				title="Details"
+				className={["col-md-6"]}
+				padding="10px"
+			>
 				<div
 					className={[
 						classes.ServerProperties,
-						"col-md-4",
-						"col-sm-12",
+						"col-md-12",
 						"h-100",
 					].join(" ")}
 				>
@@ -190,8 +193,8 @@ const serverView = (props) => {
 						</div>
 					</div>
 				</div>
-			</div>
-		</React.Fragment>
+			</FormContainer>
+		</div>
 	);
 };
 
