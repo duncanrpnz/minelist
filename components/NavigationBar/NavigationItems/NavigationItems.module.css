@@ -8,3 +8,9 @@
 
     flex-flow: row;
 }
+
+@media (max-width: 960px) {
+    .NavigationItems {
+        display: none;
+    }
+}
