@@ -246,15 +246,13 @@ class PagedTable extends Component {
 	
 
 		return (
-			<div key={this.props.key}>
+			<React.Fragment key={this.props.key}>
 				{this.props.title && (
 					<h3 className="mb-4">{this.props.title}</h3>
 				)}
 
-				<Table
+				<table
 					key={new Date().getTime()}
-					response="sm"
-					size="sm"
 					className={classes.PagedTable}
 				>
 					<thead>
@@ -269,7 +267,7 @@ class PagedTable extends Component {
 					</thead>
 
 					<tbody>{tableContent}</tbody>
-				</Table>
+				</table>
 
 				<div className="container mt-5">
 					<div className="row">
@@ -278,7 +276,7 @@ class PagedTable extends Component {
 						</div>
 					</div>
 				</div>
-			</div>
+			</React.Fragment>
 		);
 	}
 }

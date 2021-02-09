@@ -12,7 +12,8 @@
 .Server td {
     padding: 10px;
 
-
+    word-wrap:break-word;
+    word-break:break-all;
     vertical-align: middle;
 }
 
@@ -111,20 +112,23 @@
     }
 
     .Banner {
-        width: 100% !important;
+        position: relative;
+  
 
         display: block;
         margin: 0px auto;
     }
 
     .Banner img {
-        max-width: 468px;
+        width: 100%;
         margin: 0px auto;
+   
     }
 
     .ServerIp {
-        max-width: 468px;
+        width: 100%;
         margin: 0px auto;
+        margin: 0;
     }
 
     .Players {
@@ -133,8 +137,8 @@
 
     .Status {
         position: absolute;
-        top: calc(50%);
-        right: 35px;
+        right: 15px;
+        top: 115px;
         padding: 0 !important;
         margin: 0 !important;
     }
@@ -154,9 +158,12 @@
 
     .Status {
         right: 15px;
+        top: 115px;
     }
 
     .Rank {
         left: 8px;
+        top: 28px;
+        z-index: 100;
     }
 }
