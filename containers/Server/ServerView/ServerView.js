@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { JUST_VOTED_CLEAR } from "../../../redux/actionTypes";
 
 const serverView = (props) => {
-	const classesArr = ["container-fluid", "d-flex", classes.Toolbar];
+	const classesArr = ["container-fluid", classes.Toolbar];
 	const rowClasses = ["row", classes.ServerPropertyRow];
 	const router = useRouter();
 
@@ -44,12 +44,12 @@ const serverView = (props) => {
 			)}
 
 			<div className={classesArr.join(" ")}>
-				<div className="d-flex align-items-center flex-grow flex-flow-row p-3">
+				<div className="col-md-6 col-sm-6 d-flex align-items-center flex-grow flex-flow-row p-3">
 					<h3 className="mb-0">{props.name}</h3>
 				</div>
 
-				<div className="d-flex h-100">
-					<ul className={classes.Tabs}>
+				<div className="d-flex h-100 col-md-6 col-sm-6 col-xs-6  align-items-center flex-grow flex-flow-row">
+					<ul className={[classes.Tabs].join(' ')}>
 						<li
 							className={classes.TabItem}
 							onClick={() =>
