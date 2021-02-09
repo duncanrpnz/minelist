@@ -76,11 +76,17 @@ const serverView = (props) => {
 				</div>
 			</div>
 
-			<div className="container-fluid d-flex no-margin ml-0 mr-0 pl-0 pr-0">
+			<div className="container-fluid d-md-flex d-sm-block d-xs-block no-margin ml-0 mr-0 pl-0 pr-0">
+				{/* Tabs Content */}
+				<div className="col-md-8 col-sm-12 d-flex flex-column justify-content-between align-items-center mb-4 mb-sm-4 mb-xs-4 ">
+					{selectedTab}
+				</div>
+
 				<div
 					className={[
 						classes.ServerProperties,
 						"col-md-4",
+						"col-sm-12",
 						"h-100",
 					].join(" ")}
 				>
@@ -184,18 +190,12 @@ const serverView = (props) => {
 						</div>
 					</div>
 				</div>
-
-				{/* Tabs Content */}
-				<div className="col-md-8 d-flex flex-column justify-content-between align-items-center">
-					{selectedTab}
-				</div>
 			</div>
 		</React.Fragment>
 	);
 };
 
 const mapStateToProps = (state) => {
-
 	return {
 		justVoted: state.globalReducer.justVoted,
 	};
