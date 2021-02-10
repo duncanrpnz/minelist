@@ -6,71 +6,64 @@
 >
   <url>
     <loc>https://mine-list.com/</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
 
   <url>
     <loc>https://mine-list.com/api/login</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
 
   <url>
     <loc>https://mine-list.com/contact</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
 
   <url>
     <loc>https://mine-list.com/login</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
 
   <url>
     <loc>https://mine-list.com/logout</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
 
   <url>
     <loc>https://mine-list.com/privacy</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
 
   <url>
     <loc>https://mine-list.com/register</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
-
-  <!-- <url>
-    <loc>https://mine-list.com/server/[serverId]</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
-  </url> -->
 
   <url>
     <loc>https://mine-list.com/sponsor</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
 
   <url>
     <loc>https://mine-list.com/tos</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
 
   <url>
     <loc>https://mine-list.com/server/add</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
 
   <url>
     <loc>https://mine-list.com/server/manage</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
-  </url>
-
-  <!-- <url>
-    <loc>https://mine-list.com/server/manage/[serverId]</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
   </url>
 
   <url>
-    <loc>https://mine-list.com/server/[serverId]/vote</loc>
-    <lastmod>2021-02-09T09:00:00.071Z</lastmod>
-  </url> -->
+    <loc>https://mine-list.com/server/52</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod> </url
+  ><url>
+    <loc>https://mine-list.com/server/75</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
 </urlset>

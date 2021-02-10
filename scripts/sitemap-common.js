@@ -1,6 +1,7 @@
 const fs = require("fs");
 const globby = require("globby");
 const prettier = require("prettier");
+const db = require("../../minelist-api/dbConnector.js");
 
 const getDate = new Date().toISOString();
 
@@ -14,12 +15,18 @@ const formatted = sitemap => prettier.format(sitemap, { parser: "html" });
     "../pages/**/*.js",
     "../pages/*.js",
     // exclude
-    "!../pages/_*.js"
+    "!../pages/_*.js",
+    "!../pages/**/\[*\].js",
+    "!../pages/*/\[*\].js"
   ]);
 
   const pagesSitemap = `
     ${pages
       .map(page => {
+
+        if(page.match(/\[(.*)\]/))
+          return "";
+
         const path = page
           .replace("../pages/", "")
           .replace(".js", "")
@@ -35,6 +42,15 @@ const formatted = sitemap => prettier.format(sitemap, { parser: "html" });
       .join("")}
   `;
 
+  const serversMaps = await db.query("SELECT * FROM dbo.ServerList").then(result => {
+
+    return result.map(server => { return `<url>
+            <loc>${YOUR_AWESOME_DOMAIN}/server/${server.id}</loc>
+            <lastmod>${getDate}</lastmod>
+          </url>`}).join("");
+
+  });
+
   const generatedSitemap = `
     <?xml version="1.0" encoding="UTF-8"?>
     <urlset
@@ -43,6 +59,8 @@ const formatted = sitemap => prettier.format(sitemap, { parser: "html" });
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
     >
       ${pagesSitemap}
+
+      ${serversMaps}
     </urlset>
   `;
 
