@@ -32,12 +32,11 @@
     top: 0;
     left: 0;
     width: 100%;
-    max-height: 0;
+    height: 0;
     z-index: 200;
 
-    transition: max-height 1s ease-in-out;
-    -moz-transition: max-height 1s ease-in-out;
-    -webkit-transition: max-height 1s ease-in-out;
+    transition-property: all;
+    transition-duration: 1s;
 }
 
 .Backdrop {
@@ -50,11 +49,19 @@
     z-index: 100;
 }
 
+.Open {
+    display: flex;
+    height: 50%;
+}
+
 @media (max-width: 760px) {
     .SideBar {
-        display: flex;
-        max-height: 50%;
+        
+        
+        
     }
+
+
 
     .NavigationBar {
         height: 70px;

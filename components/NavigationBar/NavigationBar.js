@@ -103,23 +103,27 @@ class NavigationBar extends Component {
 			);
 		}
 
+		const sideBarClasses = [classes.SideBar];
+
+		if (this.state.sideBarOpen) {
+			sideBarClasses.push(classes.Open);
+		}
+
 		return (
 			<React.Fragment>
-				{this.state.sideBarOpen && (
-					<React.Fragment>
-					<div className={classes.Backdrop} onClick={this.sideBarCloseClickHandler}></div>
-					<div
-						className={classes.SideBar}
-						onClick={this.sideBarCloseClickHandler}
-					>
-						
-						<div className="mt-auto w-100">
-							{staticNavBarItems}
-							{navBarItems}
-						</div>
+				{/* <div
+					className={classes.Backdrop}
+					onClick={this.sideBarCloseClickHandler}
+				></div> */}
+				<div
+					className={sideBarClasses.join(" ")}
+					onClick={this.sideBarCloseClickHandler}
+				>
+					<div className="mt-auto w-100">
+						{staticNavBarItems}
+						{navBarItems}
 					</div>
-					</React.Fragment>
-				)}
+				</div>
 
 				<header
 					className={["container-fluid", classes.NavigationBar].join(
