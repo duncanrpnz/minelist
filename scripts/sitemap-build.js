@@ -1,7 +1,7 @@
 const fs = require("fs");
 const globby = require("globby");
 const prettier = require("prettier");
-const db = require("../../minelist-api/dbConnector.js");
+const db = require("./dbConnector.js");
 
 const getDate = new Date().toISOString();
 
