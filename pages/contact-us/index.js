@@ -12,6 +12,7 @@ import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import LoadingIndicator from "../../components/UI/LoadingIndicator/LoadingIndicator";
 import MessageBox from "../../components/UI/MessageBox/MessageBox";
+import Head from "next/head";
 
 import axios from "../../axios";
 
@@ -85,7 +86,7 @@ const contactIndex = (props) => {
 			const message = state.controls["message"].attributes.value;
 
 			axios
-				.post("/contact", { email, subject, message })
+				.post("/contact-us", { email, subject, message })
 				.then((result) => {
 					setMessage(
 						"Your message has been sent, we will reply to you as soon as possible."
@@ -168,6 +169,16 @@ const contactIndex = (props) => {
 
 	return (
 		<Layout authenticated={props.token ? true : false}>
+			<Head>
+				<title>
+					MineList - Contact us
+				</title>
+				<meta
+					name="viewport"
+					content="initial-scale=1.0, width=device-width"
+				/>
+			</Head>
+
 			<FormContainer
 				icon={faEnvelope}
 				title="Contact Us"

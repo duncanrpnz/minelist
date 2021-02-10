@@ -64,7 +64,7 @@ class NavigationBar extends Component {
 							</NavigationItem>
 							<NavigationItem
 								icon={faEnvelope}
-								click={() => router.push("/contact")}
+								click={() => router.push("/contact-us")}
 							>
 								Contact
 							</NavigationItem>

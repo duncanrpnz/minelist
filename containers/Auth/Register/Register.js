@@ -6,11 +6,16 @@ import axios from "../../../axios";
 
 import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button/Button";
-import { faPaperPlane, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+	faPaperPlane,
+	faSearch,
+	faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { isEmail, isValidPassword } from "../../../shared/formValidation";
 import ReCAPTCHA from "react-google-recaptcha";
 import LoadingIndicator from "../../../components/UI/LoadingIndicator/LoadingIndicator";
 import MessageBox from "../../../components/UI/MessageBox/MessageBox";
+import FormContainer from "../../../components/FormContainer/FormContainer";
 
 class Register extends Component {
 	state = {
@@ -66,7 +71,10 @@ class Register extends Component {
 				attributes: {
 					label: (
 						<p>
-							I do agree to the <a href="/tos" target="_blank">Terms of Service</a>
+							I do agree to the{" "}
+							<a href="/tos" target="_blank">
+								Terms of Service
+							</a>
 						</p>
 					),
 					id: "tosAgreement",
@@ -74,7 +82,10 @@ class Register extends Component {
 					checked: false,
 					type: "select",
 				},
-				options: [{text: "Yes", value: "Yes"}, {text: "No", value: "No"}],
+				options: [
+					{ text: "Yes", value: "Yes" },
+					{ text: "No", value: "No" },
+				],
 				defaultOption: "Please select an answer",
 				valid: false,
 				touched: false,
@@ -178,55 +189,71 @@ class Register extends Component {
 
 	render() {
 		return (
-			<form
-				className={[classes.Register, "p-4", "col-md-6", "offset-md-3", "col-sm-12"].join(' ')}
-				onSubmit={this.registerSubmitHandler}
+			<FormContainer
+				icon={faUser}
+				title="Register"
+				className={["col-md-6", "offset-md-3"]}
+				padding="10px"
 			>
-				{this.state.loading ? (
-					<LoadingIndicator />
-				) : (
-					<React.Fragment>
-						<h2>Register</h2>
-						<p>Please fill in the below registration details.</p>
+				<form
+					className={[classes.Register, "p-4", "col-md-12"].join(" ")}
+					onSubmit={this.registerSubmitHandler}
+				>
+					{this.state.loading ? (
+						<LoadingIndicator />
+					) : (
+						<React.Fragment>
+							<p>
+								Please fill in the below registration details.
+							</p>
 
-						{this.state.errors && (
-							<MessageBox>
-								{this.state.errors.join("<br/>")}
-							</MessageBox>
-						)}
-						{Object.keys(this.state.controls).map((controlKey) => {
-							const control = this.state.controls[controlKey];
+							{this.state.errors && (
+								<MessageBox>
+									{this.state.errors.join("<br/>")}
+								</MessageBox>
+							)}
+							{Object.keys(this.state.controls).map(
+								(controlKey) => {
+									const control = this.state.controls[
+										controlKey
+									];
 
-							return (
-								<Input
-									attributes={control.attributes}
-									key={controlKey}
-									valid={control.valid}
-									touched={control.touched}
-									options={control.options}
-									defaultOption={control.defaultOption}
-									changed={(event) =>
-										this.formInputChangedHandler(event)
-									}
+									return (
+										<Input
+											attributes={control.attributes}
+											key={controlKey}
+											valid={control.valid}
+											touched={control.touched}
+											options={control.options}
+											defaultOption={
+												control.defaultOption
+											}
+											changed={(event) =>
+												this.formInputChangedHandler(
+													event
+												)
+											}
+										/>
+									);
+								}
+							)}
+
+							<div className={classes.Recaptcha}>
+								<ReCAPTCHA
+									sitekey="6LeDoi8aAAAAAHS4_4avtUFw1wIAwfwg6GbhGo-k"
+									onChange={this.onChange}
 								/>
-							);
-						})}
-
-						<div className={classes.Recaptcha}>
-							<ReCAPTCHA
-								sitekey="6LeDoi8aAAAAAHS4_4avtUFw1wIAwfwg6GbhGo-k"
-								onChange={this.onChange}
-							/>
-						</div>
-						<Button
-							icon={faPaperPlane}
-							disabled={!this.state.formValid}
-						>
-							Register{" "}
-						</Button>
-					</React.Fragment>
-				)}
-			</form>
+							</div>
+							<Button
+								icon={faPaperPlane}
+								disabled={!this.state.formValid}
+							>
+								Register{" "}
+							</Button>
+						</React.Fragment>
+					)}
+				</form>
+			</FormContainer>
 		);
 	}
 }

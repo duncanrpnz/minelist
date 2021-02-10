@@ -248,7 +248,7 @@ class PagedTable extends Component {
 		return (
 			<React.Fragment key={this.props.key}>
 				{this.props.title && (
-					<h3 className="mb-4">{this.props.title}</h3>
+					<h1 className={["mb-4", classes.Title].join(' ')}>{this.props.title}</h1>
 				)}
 
 				<table

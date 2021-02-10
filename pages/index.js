@@ -30,7 +30,7 @@ export default function Home(props) {
 									<strong>
 										There are currently no sponsored
 										servers,{" "}
-										<a href="/contact?subject=Server Sponsorship">
+										<a href="/contact-us?subject=Server Sponsorship">
 											click here
 										</a>{" "}
 										to enquire.

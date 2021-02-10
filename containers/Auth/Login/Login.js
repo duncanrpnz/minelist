@@ -17,9 +17,9 @@ import { faUser, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { isEmail, isValidPassword } from "../../../shared/formValidation";
 import LoadingIndicator from "../../../components/UI/LoadingIndicator/LoadingIndicator";
 import MessageBox from "../../../components/UI/MessageBox/MessageBox";
+import FormContainer from "../../../components/FormContainer/FormContainer";
 
 const Login = ({ authenticate, token, loggingIn, error }) => {
-
 	const [formValid, setFormValid] = useState(false);
 
 	const [state, setState] = useState({
@@ -99,13 +99,11 @@ const Login = ({ authenticate, token, loggingIn, error }) => {
 			formValid = valid && formValid;
 		});
 
-
 		setFormValid(formValid);
 	};
 
 	const formContents = (
 		<React.Fragment>
-			<h2>Login</h2>
 			<p>Please fill in your login details.</p>
 
 			{Object.keys(state.controls).map((controlKey) => {
@@ -135,13 +133,26 @@ const Login = ({ authenticate, token, loggingIn, error }) => {
 	);
 
 	return (
-		<React.Fragment>
-			<form className={[classes.Login, "p-4", "col-md-6", "offset-md-3", "col-sm-12"].join(' ')} onSubmit={loginSubmitHandler}>
+		<FormContainer
+			icon={faUser}
+			title="Login"
+			className={["col-md-6", "offset-md-2"]}
+			padding="10px"
+		>
+			<form
+				className={[
+					classes.Login,
+					"p-4",
+					"col-md-12",
+					"col-sm-12",
+				].join(" ")}
+				onSubmit={loginSubmitHandler}
+			>
 				{error && <MessageBox>{error}</MessageBox>}
 
 				{loggingIn ? <LoadingIndicator /> : formContents}
 			</form>
-		</React.Fragment>
+		</FormContainer>
 	);
 };
 
@@ -151,11 +162,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
 		const currentState = context.store.getState();
 
-
 		const token = currentState.authReducer.token;
 		const error = currentState.authReucer.error;
 
-		
 		return {
 			props: {
 				token,

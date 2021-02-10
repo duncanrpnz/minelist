@@ -15,11 +15,12 @@ const formContainer = (props) => {
 			].join(" ")}
 		>
 			<div className="col-md-12">
-				<div
+				<h1
 					className={[
 						classes.FormContainerTitle,
 						"d-flex",
 						"align-items-center",
+						"mb-0"
 					].join(" ")}
 				>
 					{props.icon && (
@@ -30,7 +31,7 @@ const formContainer = (props) => {
 						/>
 					)}
 					{props.title}
-				</div>
+				</h1>
 
 				<div className={classes.FormContainerBody} style={{padding: props.padding}}>
 					{props.children}
