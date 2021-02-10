@@ -66,5 +66,5 @@ const formatted = sitemap => prettier.format(sitemap, { parser: "html" });
 
   const formattedSitemap = [formatted(generatedSitemap)];
 
-  fs.writeFileSync("./_next/static/sitemap.xml", formattedSitemap, "utf8");
+  fs.writeFileSync("./.next/static/sitemap.xml", formattedSitemap, "utf8");
 })();
