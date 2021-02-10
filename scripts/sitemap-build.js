@@ -2,6 +2,7 @@ const fs = require("fs");
 const globby = require("globby");
 const prettier = require("prettier");
 const db = require("./dbConnector.js");
+const axios = require("axios");
 
 const getDate = new Date().toISOString();
 
@@ -40,47 +41,44 @@ const run = async () => {
 		.join("")}
   `;
 
-	const serversMaps = await db
-		.query("SELECT * FROM dbo.ServerList")
-		.then((result) => {
-			const serversMaps = result
-				.map((server) => {
-					return `<url>
-                                                        <loc>${YOUR_AWESOME_DOMAIN}/server/${server.id}</loc>
-                                                        <lastmod>${getDate}</lastmod>
-                                                      </url>`;
-				})
-				.join("");
+	await axios.get("http://minelist-aus.azurewebsites.net/server-ids").then((result) => {
+		const ids = result.data;
 
-			const generatedSitemap = `
-    <?xml version="1.0" encoding="UTF-8"?>
-    <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
-    >
-      ${pagesSitemap}
+		const serversMaps=  ids.map((id) => {
+			return `<url>
+              <loc>${YOUR_AWESOME_DOMAIN}/server/${id.Id}</loc>
+              <lastmod>${getDate}</lastmod>
+            </url>`;
+		}).join("");
 
-      ${serversMaps}
-    </urlset>
-  `;
+		const generatedSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+                                  <urlset
+                                    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+                                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+                                  >
+                              ${pagesSitemap}
 
-			console.log(serversMaps);
+                              ${serversMaps}
+                            </urlset>
+`;
 
-			const formattedSitemap = [formatted(generatedSitemap)];
+		console.log(serversMaps);
 
-			console.log("formattedSitemap");
+		const formattedSitemap = [formatted(generatedSitemap)];
 
-			try {
-				fs.writeFileSync("./.next/static/sitemap.xml", formattedSitemap, "utf8");
-			} catch {
-				console.log("Failed to write sitemap.xml");
-			}
-		})
-		.catch((err) => {
-			console.log(err);
-			return err;
-		});
+		console.log("formattedSitemap");
+
+		try {
+			fs.writeFileSync(
+				"./.next/static/sitemap.xml",
+				formattedSitemap,
+				"utf8"
+			);
+		} catch {
+			console.log("Failed to write sitemap.xml");
+		}
+	});
 };
 
 run();
