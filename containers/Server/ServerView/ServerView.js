@@ -48,10 +48,9 @@ const serverView = (props) => {
 				<FormContainer
 					title={props.name}
 					className={["col-md-7", "mb-4"]}
-					padding="10px"
 				>
 					<div className="d-flex h-100 col-md-12 col-sm-6 col-xs-6  align-items-center flex-grow flex-flow-row">
-					<ul className={[classes.Tabs].join(" ")}>
+					{/* <ul className={[classes.Tabs].join(" ")}>
 						<li
 							className={classes.TabItem}
 							onClick={() =>
@@ -74,7 +73,7 @@ const serverView = (props) => {
 							Stats
 						</li>
 			
-					</ul>
+					</ul> */}
 				</div>
 
 					<div className="col-md-12 col-sm-12 d-flex flex-column justify-content-between align-items-center mb-4 mb-sm-4 mb-xs-4 ">
@@ -85,7 +84,7 @@ const serverView = (props) => {
 				<FormContainer
 					title="Details"
 					className={["col-md-5"]}
-					padding="10px"
+					padding="5px"
 				>
 					<div
 						className={[

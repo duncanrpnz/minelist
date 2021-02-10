@@ -5,16 +5,17 @@ export const description = (props) => {
 
 
 	return (
-		<div className="container h-100 d-flex flex-column">
-			<div className="row pt-4 mb-3">
-				<div className="col-md-12 text-center">
+		<div className="container d-flex flex-column">
+			<div className="row  mb-3">
+			
 					<img
 						alt={`Server advertisement banner for ${props.name}`}
 						title={`Server advertisement banner for ${props.name}`}
-						className="mb-4 mx-auto col-sm-12"
+						className="mb-4 mx-auto col-sm-12 mt-4"
+						height={64}
 						src={`${process.env.NEXT_PUBLIC_api}servers/${props.id}/banner`}
 					/>
-				</div>
+			
 			</div>
 
 			<div className="row">
