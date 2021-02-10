@@ -81,7 +81,7 @@ export default function Home(props) {
 							</div>
 						}
 						page={1}
-						pageSize={1}
+						pageSize={15}
 						maxButtonsCount={6}
 						columnsRenderer={() => {
 							// ["Rank", "Name", "Server", "Players", "Status"]

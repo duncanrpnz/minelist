@@ -12,8 +12,17 @@ import { connect } from "react-redux";
 
 import { deauthenticate } from "../../redux/actions/auth";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faSignOutAlt, faSignInAlt, faEdit, faPlus, faHome, faStar, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faUser,
+	faSignOutAlt,
+	faSignInAlt,
+	faEdit,
+	faPlus,
+	faHome,
+	faStar,
+	faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
 
 import Image from "next/image";
 
@@ -27,18 +36,36 @@ class NavigationBar extends Component {
 			>
 				<div className="container mx-auto h-100 d-flex">
 					<div className="d-flex align-items-center">
-
-						
-						<Image src="/assets/grass.png" alt="minecraft grass block" title="minecraft grass block" width={36} height={36} />
-						<Image src="/assets/logo.png" alt="Mine-list.com - Minecraft server list" title="Mine-list.com - Minecraft server list" width={200} height={32} />
+						<a href="#" onClick={() => router.push("/")} className="m-0 p-0">
+							<Image
+								src="/assets/grass.png"
+								alt="minecraft grass block"
+								title="minecraft grass block"
+								width={36}
+								height={36}
+							/>
+							<Image
+								src="/assets/logo.png"
+								alt="Mine-list.com - Minecraft server list"
+								title="Mine-list.com - Minecraft server list"
+								width={200}
+								height={32}
+							/>
+						</a>
 					</div>
 
 					<nav className="ml-4">
 						<NavigationItems>
-							<NavigationItem icon={faHome} click={() => router.push("/")}>
+							<NavigationItem
+								icon={faHome}
+								click={() => router.push("/")}
+							>
 								Home
 							</NavigationItem>
-							<NavigationItem icon={faEnvelope} click={() => router.push("/contact")}>
+							<NavigationItem
+								icon={faEnvelope}
+								click={() => router.push("/contact")}
+							>
 								Contact
 							</NavigationItem>
 							{/* <NavigationItem icon={faStar} click={() => router.push("/sponsor")}>
@@ -60,7 +87,9 @@ class NavigationBar extends Component {
 								<NavigationItems>
 									<NavigationItem
 										icon={faEdit}
-										click={() => router.push("/server/manage")}
+										click={() =>
+											router.push("/server/manage")
+										}
 									>
 										Manage Servers
 									</NavigationItem>
@@ -80,7 +109,7 @@ class NavigationBar extends Component {
 							) : (
 								<NavigationItems>
 									<NavigationItem
-									icon={faSignInAlt}
+										icon={faSignInAlt}
 										click={() => router.push("/login")}
 									>
 										Login

@@ -11,10 +11,10 @@
 
 .Server td {
     padding: 10px;
-
+/* 
     word-wrap:break-word;
     word-break:break-all;
-    vertical-align: middle;
+    vertical-align: middle; */
 }
 
 
