@@ -29,8 +29,8 @@ class NavigationBar extends Component {
 					<div className="d-flex align-items-center">
 
 						
-						<Image src="/assets/grass.png" width={36} height={36} />
-						<Image src="/assets/logo.png" width={200} height={32} />
+						<Image src="/assets/grass.png" alt="minecraft grass block" title="minecraft grass block" width={36} height={36} />
+						<Image src="/assets/logo.png" alt="Mine-list.com - Minecraft server list" title="Mine-list.com - Minecraft server list" width={200} height={32} />
 					</div>
 
 					<nav className="ml-4">

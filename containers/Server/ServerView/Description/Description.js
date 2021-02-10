@@ -9,6 +9,8 @@ export const description = (props) => {
 			<div className="row pt-4 mb-3">
 				<div className="col-md-12 text-center">
 					<img
+						alt={`Server advertisement banner for ${props.name}`}
+						title={`Server advertisement banner for ${props.name}`}
 						className="mb-4"
 						src={`${process.env.NEXT_PUBLIC_api}servers/${props.id}/banner`}
 					/>

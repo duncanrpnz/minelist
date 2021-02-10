@@ -49,6 +49,8 @@ class Server extends Component {
 				<td className={classes.Banner}>
 					<img
 						className={classes.banner}
+						alt={`Server advertisement banner for ${this.props.name}`}
+						title={`Server advertisement banner for ${this.props.name}`}
 						src={`${process.env.NEXT_PUBLIC_api}servers/${this.props.id}/banner`}
 						onClick={() => this.props.clicked(this.props.id)}
 					/>
