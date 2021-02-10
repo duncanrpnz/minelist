@@ -40,16 +40,17 @@ const serverView = (props) => {
 
 	return (
 		<div className="container">
-			{justVoted && (
-				<MessageBox type="Success">Thanks for voting!</MessageBox>
-			)}
+			<div className="row">
+				{justVoted && (
+					<MessageBox type="Success">Thanks for voting!</MessageBox>
+				)}
 
-			<FormContainer
-				title={props.name}
-				className={["col-md-6"]}
-				padding="10px"
-			>
-				{/* <div className="d-flex h-100 col-md-12 col-sm-6 col-xs-6  align-items-center flex-grow flex-flow-row">
+				<FormContainer
+					title={props.name}
+					className={["col-md-7", "mb-4"]}
+					padding="10px"
+				>
+					<div className="d-flex h-100 col-md-12 col-sm-6 col-xs-6  align-items-center flex-grow flex-flow-row">
 					<ul className={[classes.Tabs].join(" ")}>
 						<li
 							className={classes.TabItem}
@@ -72,128 +73,131 @@ const serverView = (props) => {
 						>
 							Stats
 						</li>
-						{/* <li className={classes.TabItem}>Widget</li> *
+			
 					</ul>
-				</div> */}
-
-				<div className="col-md-8 col-sm-12 d-flex flex-column justify-content-between align-items-center mb-4 mb-sm-4 mb-xs-4 ">
-					{selectedTab}
 				</div>
-			</FormContainer>
 
-			<FormContainer
-				title="Details"
-				className={["col-md-6"]}
-				padding="10px"
-			>
-				<div
-					className={[
-						classes.ServerProperties,
-						"col-md-12",
-						"h-100",
-					].join(" ")}
+					<div className="col-md-12 col-sm-12 d-flex flex-column justify-content-between align-items-center mb-4 mb-sm-4 mb-xs-4 ">
+						{selectedTab}
+					</div>
+				</FormContainer>
+
+				<FormContainer
+					title="Details"
+					className={["col-md-5"]}
+					padding="10px"
 				>
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Status</strong>
+					<div
+						className={[
+							classes.ServerProperties,
+							"col-md-12",
+							"h-100",
+						].join(" ")}
+					>
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Status</strong>
+							</div>
+
+							<div className="col-md-6">
+								<StatusIndicator online={props.online} />
+							</div>
 						</div>
 
-						<div className="col-md-6">
-							<StatusIndicator online={props.online} />
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Host / IP</strong>
+							</div>
+
+							<div className="col-md-6">{props.ip}</div>
+						</div>
+
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Port</strong>
+							</div>
+
+							<div className="col-md-6">{props.port}</div>
+						</div>
+
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Players</strong>
+							</div>
+
+							<div className="col-md-6">
+								{props.players_online}/{props.max_players}
+							</div>
+						</div>
+
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Votes</strong>
+							</div>
+
+							<div className="col-md-6">{props.total_votes}</div>
+						</div>
+
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Uptime</strong>
+							</div>
+
+							<div className="col-md-6">
+								{props.uptime.toFixed(2)}%
+							</div>
+						</div>
+
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Website</strong>
+							</div>
+
+							<div className="col-md-6">
+								<a href={props.social_website} target="_blank">
+									{props.social_website}
+								</a>
+							</div>
+						</div>
+
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Discord</strong>
+							</div>
+
+							<div className="col-md-6">
+								{props.social_discord}
+							</div>
+						</div>
+
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Version</strong>
+							</div>
+
+							<div className="col-md-6">{props.version}</div>
+						</div>
+
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Country</strong>
+							</div>
+
+							<div className="col-md-6">{props.country}</div>
+						</div>
+
+						<div className={rowClasses.join(" ")}>
+							<div className="col-md-6">
+								<strong>Last Checked</strong>
+							</div>
+
+							<div className="col-md-6">
+								{Moment(props.last_polled).fromNow()}
+							</div>
 						</div>
 					</div>
-
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Host / IP</strong>
-						</div>
-
-						<div className="col-md-6">{props.ip}</div>
-					</div>
-
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Port</strong>
-						</div>
-
-						<div className="col-md-6">{props.port}</div>
-					</div>
-
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Players</strong>
-						</div>
-
-						<div className="col-md-6">
-							{props.players_online}/{props.max_players}
-						</div>
-					</div>
-
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Votes</strong>
-						</div>
-
-						<div className="col-md-6">{props.total_votes}</div>
-					</div>
-
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Uptime</strong>
-						</div>
-
-						<div className="col-md-6">
-							{props.uptime.toFixed(2)}%
-						</div>
-					</div>
-
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Website</strong>
-						</div>
-
-						<div className="col-md-6">
-							<a href={props.social_website} target="_blank">
-								{props.social_website}
-							</a>
-						</div>
-					</div>
-
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Discord</strong>
-						</div>
-
-						<div className="col-md-6">{props.social_discord}</div>
-					</div>
-
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Version</strong>
-						</div>
-
-						<div className="col-md-6">{props.version}</div>
-					</div>
-
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Country</strong>
-						</div>
-
-						<div className="col-md-6">{props.country}</div>
-					</div>
-
-					<div className={rowClasses.join(" ")}>
-						<div className="col-md-6">
-							<strong>Last Checked</strong>
-						</div>
-
-						<div className="col-md-6">
-							{Moment(props.last_polled).fromNow()}
-						</div>
-					</div>
-				</div>
-			</FormContainer>
+				</FormContainer>
+			</div>
 		</div>
 	);
 };
