@@ -23,3 +23,18 @@
     color: white;
     text-decoration: none;
 }
+
+
+@media (max-width: 760px) {
+
+    .NavigationItem {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #FFF;
+        display: flex;
+    }
+
+    .NavigationItem a {
+        margin: 0px auto;
+    }
+}

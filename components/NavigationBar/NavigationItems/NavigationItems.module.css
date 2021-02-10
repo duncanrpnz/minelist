@@ -9,8 +9,12 @@
     flex-flow: row;
 }
 
-@media (max-width: 960px) {
+
+@media (max-width: 760px) {
+
     .NavigationItems {
-        display: none;
+        width: 100%;
+        display: block;
+        flex-flow: wrap;
     }
 }
