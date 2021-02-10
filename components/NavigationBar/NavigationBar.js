@@ -150,7 +150,7 @@ class NavigationBar extends Component {
 							</a>
 						</div>
 
-						<nav className="ml-4 d-sm-none d-md-flex">
+						<nav className="ml-4 d-none d-md-flex">
 							<NavigationItems>
 								{staticNavBarItems}
 							</NavigationItems>
@@ -162,10 +162,10 @@ class NavigationBar extends Component {
 								size="2x"
 								onClick={this.sideBarOpenClickHandler}
 								color="white"
-								className="d-md-none d-sm-block cursor-pointer"
+								className="d-sm-block d-md-none  cursor-pointer"
 							></FontAwesomeIcon>
 
-							<nav className="ml-4 d-sm-none d-md-flex">
+							<nav className="ml-4 d-none d-md-flex">
 								{navBarItems}
 							</nav>
 						</div>
