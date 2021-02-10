@@ -98,11 +98,10 @@ const insert = (table, object) => {
 	});
 };
 
-const query = (sql, params) => {
+const query = async (sql, params) => {
 	return new Promise((resolve, reject) => {
 		var connection = new Connection(config);
-
-		connection.on("connect", function (err) {
+		connection.connect((err) => {
 			if (err) {
 				console.log("Error: ", err);
 			}
@@ -126,7 +125,7 @@ const query = (sql, params) => {
 
 			request.on("doneInProc", (rowCount, more, rows) => {
 				resultsArr = [];
-				
+
 				rows.forEach((columns) => {
 					var rowObject = {};
 
@@ -135,7 +134,6 @@ const query = (sql, params) => {
 					});
 					resultsArr.push(rowObject);
 				});
-
 
 				resolve(resultsArr);
 			});

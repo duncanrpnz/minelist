@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+  <url>
+    <loc>https://mine-list.com/</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/api/login</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/contact</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/login</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/logout</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/privacy</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/register</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/sponsor</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/tos</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/server/add</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/server/manage</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://mine-list.com/server/52</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod> </url
+  ><url>
+    <loc>https://mine-list.com/server/75</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod> </url
+  ><url>
+    <loc>https://mine-list.com/server/76</loc>
+    <lastmod>2021-02-10T06:04:52.600Z</lastmod>
+  </url>
+</urlset>
