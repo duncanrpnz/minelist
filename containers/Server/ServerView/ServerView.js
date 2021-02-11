@@ -45,41 +45,29 @@ const serverView = (props) => {
 					<MessageBox type="Success">Thanks for voting!</MessageBox>
 				)}
 
-				<FormContainer
-					title={props.name}
-					className={["col-md-7", "mb-4"]}
-				>
-					<div className="d-flex h-100 col-md-12 col-sm-6 col-xs-6  align-items-center flex-grow flex-flow-row">
-					{/* <ul className={[classes.Tabs].join(" ")}>
-						<li
-							className={classes.TabItem}
-							onClick={() =>
-								setSelectedTab(
-									<Description
-										{...props}
-										voteClicked={voteButtonClicked}
-									/>
-								)
-							}
-						>
-							Description
-						</li>
-						<li
-							className={classes.TabItem}
-							onClick={() =>
-								setSelectedTab(<Stats serverId={props.id} />)
-							}
-						>
-							Stats
-						</li>
-			
-					</ul> */}
-				</div>
+				<div className="col-md-7 mr-0 ml-0 pr-0 pl-0">
+					<FormContainer
+						title={props.name}
+						className={["col-md-12", "mb-4"]}
+					>
+						<div className="d-flex h-100 col-md-12 col-sm-6 col-xs-6  align-items-center flex-grow flex-flow-row"></div>
 
-					<div className="col-md-12 col-sm-12 d-flex flex-column justify-content-between align-items-center mb-4 mb-sm-4 mb-xs-4 ">
-						{selectedTab}
-					</div>
-				</FormContainer>
+						<div className="col-md-12 col-sm-12 d-flex flex-column justify-content-between align-items-center mb-4 mb-sm-4 mb-xs-4 ">
+							{selectedTab}
+						</div>
+					</FormContainer>
+
+					<FormContainer
+						title="Statistics"
+						className={["col-md-12", "mb-4"]}
+					>
+						<div className="d-flex h-100 col-md-12 col-sm-6 col-xs-6  align-items-center flex-grow flex-flow-row"></div>
+
+						<div className="col-md-12 col-sm-12 d-flex flex-column justify-content-between align-items-center mb-4 mb-sm-4 mb-xs-4 ">
+							<Stats serverId={props.id} />
+						</div>
+					</FormContainer>
+				</div>
 
 				<FormContainer
 					title="Details"

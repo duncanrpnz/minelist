@@ -4,11 +4,10 @@ import { checkServerSideCookie } from "../../../redux/actions/auth";
 import { useRouter } from "next/router";
 import Layout from "../../../hoc/Layout/Layout";
 import ServerAdd from "../../../containers/Server/ServerAdd/ServerAdd";
+import FormContainer from "../../../components/FormContainer/FormContainer";
 
 import Head from "next/head";
-
 export default function addServerIndex(props) {
-
 	return (
 		<Layout authenticated={props.token ? true : false}>
 			<Head>
@@ -18,7 +17,14 @@ export default function addServerIndex(props) {
 					content="initial-scale=1.0, width=device-width"
 				/>
 			</Head>
-			<ServerAdd />
+
+			<FormContainer
+				title="Add Server"
+				className={["col-md-5"]}
+				padding="5px"
+			>
+				<ServerAdd />
+			</FormContainer>
 		</Layout>
 	);
 }

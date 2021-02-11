@@ -326,8 +326,6 @@ const serverAdd = (props) => {
 	if (!loading) {
 		form = (
 			<div className={classes.ServerAdd}>
-				<h3 className="mr-0 ml-0">{!props.id ? "Add server" : "Update your server"}</h3>
-
 				<div className="p-3">
 					<p>
 						{!props.id

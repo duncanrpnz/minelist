@@ -4,8 +4,9 @@ import { checkServerSideCookie } from "../../../redux/actions/auth";
 import { useRouter } from "next/router";
 import Layout from "../../../hoc/Layout/Layout";
 import ServerAdd from "../../../containers/Server/ServerAdd/ServerAdd";
-import Head from "next/head";
+import FormContainer from "../../../components/FormContainer/FormContainer";
 
+import Head from "next/head";
 const manageServer = (props) => {
 	const router = useRouter();
 	const { serverId } = router.query;
@@ -19,7 +20,14 @@ const manageServer = (props) => {
 					content="initial-scale=1.0, width=device-width"
 				/>
 			</Head>
-			<ServerAdd id={serverId} />
+
+			<FormContainer
+				title="Update Server"
+				className={["col-md-5"]}
+				padding="5px"
+			>
+				<ServerAdd id={serverId} />
+			</FormContainer>
 		</Layout>
 	);
 };
