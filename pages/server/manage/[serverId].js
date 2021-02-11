@@ -23,7 +23,7 @@ const manageServer = (props) => {
 
 			<FormContainer
 				title="Update Server"
-				className={["col-md-5"]}
+				className={["col-md-6 offset-md-3"]}
 				padding="5px"
 			>
 				<ServerAdd id={serverId} />
