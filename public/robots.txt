@@ -4,5 +4,5 @@ Disallow: /server/manage/*
 Disallow: /server/manage
 Disallow: /server/*/vote
 
-Sitemap: sitemap-common.xml
+Sitemap: https://mine-list.com/sitemap.xml
 
