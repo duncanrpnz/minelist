@@ -122,8 +122,8 @@ class NavigationBar extends Component {
 
 		const backdropTransitionStyles = {
 			entering: { background: "rgba(0, 0, 0, 0)", display: "none" },
-			entered: { background: "rgba(0, 0, 0, 0.5)", display: "block" },
-			exiting: { background: "rgba(0, 0, 0, 0.5)", display: "block" },
+			entered: { background: "rgba(0, 0, 0, 0.5)"},
+			exiting: { background: "rgba(0, 0, 0, 0.5)" },
 			exited: { background: "rgba(0, 0, 0, 0)", display: "none" },
 		};
 

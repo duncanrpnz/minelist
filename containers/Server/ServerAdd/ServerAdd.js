@@ -325,7 +325,7 @@ const serverAdd = (props) => {
 
 	if (!loading) {
 		form = (
-			<div className={classes.ServerAdd}>
+			<div className={[classes.ServerAdd, "col-md-12"].join(' ')}>
 				<div className="p-3">
 					<p>
 						{!props.id
@@ -384,7 +384,7 @@ const serverAdd = (props) => {
 
 	return (
 		<form
-			className="col-md-6 offset-md-3 pr-0 pl-0"
+			className="col-md-12 pr-0 pl-0"
 			ref={formRef}
 			encType="multipart/form-data"
 		>

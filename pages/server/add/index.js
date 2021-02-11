@@ -20,7 +20,7 @@ export default function addServerIndex(props) {
 
 			<FormContainer
 				title="Add Server"
-				className={["col-md-5"]}
+				className={["col-md-8 offset-md-2"]}
 				padding="5px"
 			>
 				<ServerAdd />

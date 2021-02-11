@@ -113,6 +113,7 @@ const serverVoteIndex = (props) => {
 		const data = {
 			clientIp: clientIp,
 			minecraftUsername: controls["username"].attributes.value,
+			recaptcha: recaptchaValue
 		};
 
 		axiosApi
