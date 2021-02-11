@@ -1,4 +1,6 @@
 import React, { Component, useState } from "react";
+import { CSSTransition } from "react-transition-group";
+
 import classes from "./NavigationBar.module.css";
 
 import NavigationItems from "./NavigationItems/NavigationItems";
@@ -26,6 +28,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import Image from "next/image";
+
+
 
 class NavigationBar extends Component {
 	state = {
@@ -109,22 +113,46 @@ class NavigationBar extends Component {
 			sideBarClasses.push(classes.Open);
 		}
 
+		const sidebarTransitionStyles = {
+			entering: { transform: "translateY(-500px)" },
+			entered: { transform: "translateY(0)" },
+			exiting: { transform: "translateY(0)" },
+			exited: { transform: "translateY(-500px)" },
+		};
+
+		const backdropTransitionStyles = {
+			entering: { background: "rgba(0, 0, 0, 0)", display: "none" },
+			entered: { background: "rgba(0, 0, 0, 0.5)", display: "block" },
+			exiting: { background: "rgba(0, 0, 0, 0.5)", display: "block" },
+			exited: { background: "rgba(0, 0, 0, 0)", display: "none" },
+		};
+
 		return (
 			<React.Fragment>
-				{/* <div
-					className={classes.Backdrop}
-					onClick={this.sideBarCloseClickHandler}
-				></div> */}
-				<div
-					className={sideBarClasses.join(" ")}
-					onClick={this.sideBarCloseClickHandler}
-				>
-					<div className="mt-auto w-100">
-						{staticNavBarItems}
-						{navBarItems}
-					</div>
-				</div>
+				
+				<CSSTransition in={this.state.sideBarOpen} timeout={0}>
+					{(state) => {
+						return (
+							<div
+								className={classes.Backdrop}
+								style={{ ...backdropTransitionStyles[state] }}
+								onClick={this.sideBarCloseClickHandler}
+							></div>
+						);
+					}}
+				</CSSTransition>
 
+	
+					<div
+						className={sideBarClasses.join(" ")}
+						onClick={this.sideBarCloseClickHandler}
+					>
+						<div className="mt-auto w-100">
+							{staticNavBarItems}
+							{navBarItems}
+						</div>
+					</div>
+			
 				<header
 					className={["container-fluid", classes.NavigationBar].join(
 						" "

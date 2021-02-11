@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { wrapper } from "../redux";
 
 import Head from "next/head";
-
+import "../components/NavigationBar/NavigationBarTransition.css";
 function MyApp({ Component, pageProps }) {
 	return (
 		<React.Fragment>
