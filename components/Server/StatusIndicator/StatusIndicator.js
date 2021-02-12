@@ -4,13 +4,12 @@ import classes from './StatusIndicator.module.css';
 
 const statusIndicator = (props) => {
 
-    const onlineVal = parseInt(props.online);
 
-    const classArr = [classes.StatusIndicator, onlineVal ? classes.Online : classes.Offline];
+    const classArr = [classes.StatusIndicator, props.online ? classes.Online : classes.Offline];
 
 
     return (
-        <span className={classArr.join(' ')}>{onlineVal ? "Online" : "Offline"}</span>
+        <span className={classArr.join(' ')}>{props.online ? "Online" : "Offline"}</span>
     );
 };
 
