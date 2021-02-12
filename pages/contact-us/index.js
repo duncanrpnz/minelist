@@ -177,6 +177,8 @@ const contactIndex = (props) => {
 					name="viewport"
 					content="initial-scale=1.0, width=device-width"
 				/>
+
+				<link rel="canonical" href="https://www.mine-list.com/contact-us" />
 			</Head>
 
 			<FormContainer

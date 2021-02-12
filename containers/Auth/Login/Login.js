@@ -136,7 +136,7 @@ const Login = ({ authenticate, token, loggingIn, error }) => {
 		<FormContainer
 			icon={faUser}
 			title="Login"
-			className={["col-md-6", "offset-md-2"]}
+			className={["col-md-6", "offset-md-3"]}
 			padding="10px"
 		>
 			<form

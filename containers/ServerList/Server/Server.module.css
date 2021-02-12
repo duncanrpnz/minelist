@@ -21,6 +21,12 @@
 
 .Server .name {
     cursor: pointer;
+
+}
+
+.Link {
+    color: black;
+    text-decoration: none;
 }
 
 .Banner img {

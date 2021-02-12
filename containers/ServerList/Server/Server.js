@@ -39,21 +39,25 @@ class Server extends Component {
 						" "
 					)}
 				>
-					<span
-						className="font-weight-bold"
-						onClick={() => this.props.clicked(this.props.id)}
-					>
-						{this.props.name}
-					</span>
+					<a href={`/server/${this.props.id}`} className={classes.Link}>
+						<span
+							className="font-weight-bold"
+							// onClick={() => this.props.clicked(this.props.id)}
+						>
+							{this.props.name}
+						</span>
+					</a>
 				</td>
 				<td className={classes.Banner}>
-					<img
-						className={classes.banner}
-						alt={`Server advertisement banner for ${this.props.name}`}
-						title={`Server advertisement banner for ${this.props.name}`}
-						src={`${process.env.NEXT_PUBLIC_api}servers/${this.props.id}/banner`}
-						onClick={() => this.props.clicked(this.props.id)}
-					/>
+					<a href={`/server/${this.props.id}`}>
+						<img
+							className={classes.banner}
+							alt={`Server advertisement banner for ${this.props.name}`}
+							title={`Server advertisement banner for ${this.props.name}`}
+							src={`${process.env.NEXT_PUBLIC_api}servers/${this.props.id}/banner`}
+							// onClick={() => this.props.clicked(this.props.id)}
+						/>
+					</a>
 
 					<div
 						className={["row", "text-right", classes.ServerIp].join(

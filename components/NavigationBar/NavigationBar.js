@@ -53,12 +53,12 @@ class NavigationBar extends Component {
 
 		let staticNavBarItems = (
 			<React.Fragment>
-				<NavigationItem icon={faHome} click={() => router.push("/")}>
+				<NavigationItem icon={faHome} href="/">
 					Home
 				</NavigationItem>
 				<NavigationItem
 					icon={faEnvelope}
-					click={() => router.push("/contact-us")}
+					href="/contact-us"
 				>
 					Contact
 				</NavigationItem>
@@ -69,19 +69,19 @@ class NavigationBar extends Component {
 			<NavigationItems>
 				<NavigationItem
 					icon={faEdit}
-					click={() => router.push("/server/manage")}
+					href="/server/manage"
 				>
 					Manage Servers
 				</NavigationItem>
 				<NavigationItem
 					icon={faPlus}
-					click={() => router.push("/server/add")}
+					href="/server/add"
 				>
 					Add Server
 				</NavigationItem>
 				<NavigationItem
 					icon={faSignOutAlt}
-					click={() => router.push("/logout")}
+					href="/logout"
 				>
 					Logout
 				</NavigationItem>
@@ -93,13 +93,13 @@ class NavigationBar extends Component {
 				<NavigationItems>
 					<NavigationItem
 						icon={faSignInAlt}
-						click={() => router.push("/login")}
+						href="/login"
 					>
 						Login
 					</NavigationItem>
 					<NavigationItem
 						icon={faUser}
-						click={() => router.push("/register")}
+						href="/register"
 					>
 						Register
 					</NavigationItem>
