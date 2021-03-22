@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "postbuild": "node ./scripts/sitemap-build.js"
+    "postbuild": "node ./scripts/sitemap-build.js",
+    "export": "npm run build && next export -o _static"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
