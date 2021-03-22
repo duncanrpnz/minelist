@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -H 0.0.0.0 -p ${PORT:-8080}"
+    "start": "next start -H 0.0.0.0 -p ${PORT:-8080}",
     "postbuild": "node ./scripts/sitemap-build.js",
     "export": "npm run build && next export -o _static"
   },
